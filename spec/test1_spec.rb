@@ -1,4 +1,4 @@
-require_relative "spec_helper"
+require_relative "../util/spec_helper"
 
 describe "Google Search" do
   it "search text on google" do
