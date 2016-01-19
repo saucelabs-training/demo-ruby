@@ -1,11 +1,14 @@
-# Changes to be made (reference Sauce Account)
+# Usage
 
+## Set Sauce Credentials:
 ```
-	export SAUCE_USERNAME=your_username
-	export SAUCE_ACCESS_KEY=your_access_key
-	
+$ export SAUCE_USERNAME=sauce_username
+$ export SAUCE_ACCESS_KEY=sauce_access_key
 ```
-
+## Set Build ID (optional):
+```
+$ export BUILD_TAG=sauce_automated_build_name
+```
 # Setup
 install bundler: `gem install bundler  # use sudo if necessary`
 
