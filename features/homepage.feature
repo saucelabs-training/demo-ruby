@@ -4,5 +4,5 @@ Feature: Sauce Labs Homepage
     Given I am on the Sauce Labs homepage
     Then the title of the page should be
       """
-      Sauce Labs: Selenium Testing, Mobile Testing, JS Unit Testing and More
+      Sauce Labs: Selenium Testing, Mobile Testing, JS Unit Testing
       """
