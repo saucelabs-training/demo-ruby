@@ -11,7 +11,7 @@ Capybara.register_driver :selenium do | app|
     :platform => ENV['platform'],
   }
 
-  url = "http://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:80/wd/hub".strip
+  url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 
   Capybara::Selenium::Driver.new(app,
                                  :browser => :remote, :url => url,
