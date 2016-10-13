@@ -7,11 +7,6 @@ def setup_sauce_env()
   if ENV['SAUCE_USERNAME'] == nil or ENV['SAUCE_ACCESS_KEY'] == nil
     abort("No Sauce Labs credentials are set!")
   end
-  # check if selenium relay port is set if not set it to direct
-  if ENV['SELENIUM_PORT'] == nil or ENV['SELENIUM_HOST'] == nil
-    ENV['SELENIUM_HOST'] = 'ondemand.saucelabs.com'
-    ENV['SELENIUM_PORT'] = '80'
-  end
 end
 
 RSpec.configure do | config |
@@ -33,7 +28,7 @@ RSpec.configure do | config |
     if ENV['TUNNEL_IDENTIFIER'] != nil
       capabilities_config['tunnel-identifier'] = ENV['TUNNEL_IDENTIFIER']
     end
-    url = "http://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub".strip
+    url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
     @browser = Selenium::WebDriver.for(:remote, :url => url, :desired_capabilities => capabilities_config)
   end
 
