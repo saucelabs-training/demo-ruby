@@ -1,6 +1,10 @@
+@success = true
+
 def run_tests(platform, browser, version, junit_dir)
-  system("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" parallel_cucumber features -o \"--format junit --out #{junit_dir} --format pretty\" -n 20")
+  @success &= system("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" parallel_cucumber features -o \"--format junit --out #{junit_dir} --format pretty\" -n 20")
 end
+
+task :default => [:test_sauce]
 
 # Windows 8.1, Chrome 43
 task :windows_8_1_chrome_43 do
@@ -29,5 +33,5 @@ multitask :test_sauce => [
     :os_x_10_9_safari_7,
     :windows_xp_firefox_39
   ] do
-    puts 'Running automation'
+    raise "Tests failed!" unless @success
 end
