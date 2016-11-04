@@ -1,5 +1,7 @@
 class HomePage
-  include PageObject
+  def initialize(browser)
+    @browser = browser
+  end
 
   def link
   	@browser.find_element(:css => "[id='i am a link']")
@@ -8,5 +10,4 @@ class HomePage
   def email_text_box
   	@browser.find_element(:id => 'fbemail')
   end
-
 end

@@ -1,16 +1,7 @@
 begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
 require 'selenium-webdriver'
-require 'page-object'
-require 'require_all'
 require 'sauce_whisk'
-
-begin
-	require_all "#{File.join(File.expand_path(File.dirname(__FILE__)), '..', 'page_objects')}"
-rescue
-	puts "no page objects found"
-end
-
-@browser = nil
+require_relative '../page_objects/home_page'
 
 Before do | scenario |
   capabilities_config = {
@@ -26,8 +17,6 @@ Before do | scenario |
   client.timeout = 180
 
   @browser = Selenium::WebDriver.for(:remote, :url => url, :desired_capabilities => capabilities, :http_client => client)
-
-  @browser.manage.timeouts.implicit_wait = 10
 end
 
 # "after all"
