@@ -1,7 +1,7 @@
 @success = true
 
 def run_tests(platform, browser, version, junit_dir)
-  @success &= system("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" parallel_cucumber features -o \"--format junit --out #{junit_dir} --format pretty\" -n 20")
+  sh("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" parallel_cucumber features -o \"--format junit --out #{junit_dir} --format pretty\" -n 20")
 end
 
 task :default => [:test_sauce]
@@ -32,6 +32,4 @@ multitask :test_sauce => [
     :windows_7_ie_11,
     :os_x_10_11_safari_10,
     :os_x_10_10_firefox_49
-  ] do
-    raise StandardError, "Tests failed!" unless @success
-end
+  ]
