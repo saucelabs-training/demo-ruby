@@ -6,32 +6,32 @@ end
 
 task :default => [:test_sauce]
 
-# Windows 8.1, Chrome 43
-task :windows_8_1_chrome_43 do
-  run_tests('Windows 8.1', 'chrome', '43', 'junit_reports/windows_8_1_chrome_43')
+task :windows_10_edge_14 do
+  run_tests('Windows 10', 'edge', '14.14393', 'junit_reports/windows_10_edge_14')
 end
 
-# Windows 7, Firefox 40
-task :windows_7_firefox_40 do
-  run_tests('Windows 7', 'firefox', '40', 'junit_reports/windows_7_firefox40')
+task :windows_10_chrome_54 do
+  run_tests('Windows 10', 'chrome', '54.0', 'junit_reports/windows_10_chrome_54')
 end
 
-# OS X 10.9 Chrome 45
-task :os_x_10_9_safari_7 do
-  run_tests('OS X 10.9', 'safari', '7', 'junit_reports/os_x_10_9_safari_7')
+task :windows_7_ie_11 do
+  run_tests('Windows 7', 'internet_explorer', '11.0', 'junit_reports/windows_7_ie_11')
 end
 
-# Windows XP Firefox 39
-task :windows_xp_firefox_39 do
-  run_tests('Windows XP', 'firefox', '39', 'junit_reports/windows_xp_firefox_39')
+task :os_x_10_11_safari_10 do
+  run_tests('OS X 10.11', 'safari', '10.0', 'junit_reports/os_x_10_11_safari_10')
 end
 
-# Task to run all the above configurations in parallel
+task :os_x_10_10_firefox_49 do
+  run_tests('OS X 10.10', 'firefox', '49.0', 'junit_reports/os_x_10_10_firefox_49')
+end
+
 multitask :test_sauce => [
-    :windows_8_1_chrome_43,
-    :windows_7_firefox_40,
-    :os_x_10_9_safari_7,
-    :windows_xp_firefox_39
+    :windows_10_edge_14,
+    :windows_10_chrome_54,
+    :windows_7_ie_11,
+    :os_x_10_11_safari_10,
+    :os_x_10_10_firefox_49
   ] do
-    raise "Tests failed!" unless @success
+    raise StandardError, "Tests failed!" unless @success
 end

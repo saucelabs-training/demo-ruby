@@ -2,7 +2,7 @@ source "https://www.rubygems.org"
 
 gem 'cucumber', '>=2.0.0'
 gem 'rspec'
-gem 'selenium-webdriver', '2.53.4'
+gem 'selenium-webdriver', '~> 3.0'
 gem 'parallel_tests'
 gem 'page-object'
 gem 'require_all'

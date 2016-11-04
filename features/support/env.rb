@@ -13,20 +13,19 @@ end
 @browser = nil
 
 Before do | scenario |
-	# need to configure env variables for browser
   capabilities_config = {
     :version => "#{ENV['version']}",
-    :browserName => "#{ENV['browserName']}",
     :platform => "#{ENV['platform']}",
     :name => "#{scenario.feature.name} - #{scenario.name}"
   }
+  capabilities = Selenium::WebDriver::Remote::Capabilities.send(ENV['browserName'].to_sym, capabilities_config)
 
   url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 
   client = Selenium::WebDriver::Remote::Http::Default.new
   client.timeout = 180
 
-  @browser = Selenium::WebDriver.for(:remote, :url => url, :desired_capabilities => capabilities_config, :http_client => client)
+  @browser = Selenium::WebDriver.for(:remote, :url => url, :desired_capabilities => capabilities, :http_client => client)
 
   @browser.manage.timeouts.implicit_wait = 10
 end
