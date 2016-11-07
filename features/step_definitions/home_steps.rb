@@ -3,8 +3,9 @@ Given 'I am on the Guinea Pig homepage' do
   @home_page.visit
 end
 
-Then /the title of the page should be/ do |text|
-  expect(@home_page.title).to eq text
+Then /I should be on another page/ do
+  another_page = AnotherPage.new(@browser)
+  expect(another_page.on_page?).to eq true
 end
 
 And 'I click on the link' do
