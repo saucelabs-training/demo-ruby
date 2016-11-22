@@ -14,9 +14,9 @@ end
 
 When /^I submit a comment$/ do
   @comment = "This is a comment"
-	@home_page.comment = @comment
+  @home_page.comment = @comment
 end
 
 Then /^I should see that comment displayed$/ do
-	expect(@home_page.comment).to eq @comment
+  expect(@home_page.comment).to eq @comment
 end
