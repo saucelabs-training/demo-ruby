@@ -4,7 +4,7 @@ class HomePage
   end
 
   def visit
-    @browser.navigate.to "http://saucelabs.github.io/training-test-page/"
+    @browser.navigate.to "https://saucelabs-sample-test-frameworks.github.io/training-test-page/"
   end
 
   def title
@@ -12,7 +12,7 @@ class HomePage
   end
 
   def follow_link
-  	@browser.find_element(css: "[id='i am a link']").click
+  	@browser.find_element(id: 'i_am_a_link').click
   end
 
   def comment=(text)
