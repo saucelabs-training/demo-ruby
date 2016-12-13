@@ -9,6 +9,9 @@ Before do | scenario |
     :platform => "#{ENV['platform']}",
     :name => "#{scenario.feature.name} - #{scenario.name}"
   }
+  build_name = ENV['JENKINS_BUILD_NUMBER'] || ENV['SAUCE_BAMBOO_BUILDNUMBER'] || ENV['SAUCE_TC_BUILDNUMBER'] || ENV['SAUCE_BUILD_NAME']
+  capabilities_config[:build] = build_name unless build_name.nil?
+
   capabilities = Selenium::WebDriver::Remote::Capabilities.send(ENV['browserName'].to_sym, capabilities_config)
 
   url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
