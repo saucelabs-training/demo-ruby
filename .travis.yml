@@ -1,6 +1,6 @@
 language: ruby
 rvm:
-- 2.4.0
+- 2.3.3
 before_install:
 - export | grep SAUCE_
 env:
