@@ -7,7 +7,7 @@ end
 task default: :test_sauce
 
 task :parallel_run do
-  system 'parallel_rspec spec'
+  system 'parallel_split_test spec'
 end
 
 task :windows_10_edge_14 do
