@@ -10,43 +10,57 @@ task :parallel_run do
   system 'parallel_rspec spec'
 end
 
-task :windows_8_1_chrome_43 do
-  ENV['platform'] = 'Windows 8.1'
-  ENV['browserName'] = 'chrome'
-  ENV['version'] = '43'
-  ENV['JUNIT_DIR'] = 'junit_reports/windows_8_1_chrome_43'
+task :windows_10_edge_14 do
+  ENV['platform'] = 'Windows 10'
+  ENV['browserName'] = 'edge'
+  ENV['version'] = '14.14393'
+  ENV['JUNIT_DIR'] = 'junit_reports/windows_10_edge_14'
+
   Rake::Task[:parallel_run].execute
 end
 
-task :windows_7_firefox_40 do
+task :windows_10_firefox_49 do
+  ENV['platform'] = 'Windows 10'
+  ENV['browserName'] = 'firefox'
+  ENV['version'] = '49.0'
+  ENV['JUNIT_DIR'] = 'junit_reports/windows_10_firefox_49'
+
+  Rake::Task[:parallel_run].execute
+end
+
+task :windows_7_ie_11 do
   ENV['platform'] = 'Windows 7'
-  ENV['browserName'] = 'firefox'
-  ENV['version'] = '40'
-  ENV['JUNIT_DIR'] = 'junit_reports/windows_7_firefox40'
+  ENV['browserName'] = 'internet_explorer'
+  ENV['version'] = '11.0'
+  ENV['JUNIT_DIR'] = 'junit_reports/windows_7_ie_11'
+
   Rake::Task[:parallel_run].execute
 end
 
-task :os_x_10_9_chrome_45 do
-  ENV['platform'] = 'OS X 10.9'
+task :os_x_10_11_safari_10 do
+  ENV['platform'] = 'OS X 10.11'
+  ENV['browserName'] = 'safari'
+  ENV['version'] = '10.0'
+  ENV['JUNIT_DIR'] = 'junit_reports/os_x_10_11_safari_10'
+
+  Rake::Task[:parallel_run].execute
+end
+
+task :os_x_10_10_chrome_54 do
+  ENV['platform'] = 'OS X 10.10'
   ENV['browserName'] = 'chrome'
-  ENV['version'] = '45'
-  ENV['JUNIT_DIR'] = 'junit_reports/os_x_10_9_chrome_45'
-  Rake::Task[:parallel_run].execute
-end
+  ENV['version'] = '54.0'
+  ENV['JUNIT_DIR'] = 'junit_reports/os_x_10_10_chrome_54'
 
-task :windows_xp_firefox_39 do
-  ENV['platform'] = 'Windows XP'
-  ENV['browserName'] = 'firefox'
-  ENV['version'] = '39'
-  ENV['JUNIT_DIR'] = 'junit_reports/windows_xp_firefox_39'
   Rake::Task[:parallel_run].execute
 end
 
 multitask :test_sauce => [
-    :windows_8_1_chrome_43,
-    :windows_7_firefox_40,
-    :os_x_10_9_chrome_45,
-    :windows_xp_firefox_39
-  ] do
-    puts 'Running automation'
+    :windows_10_edge_14,
+    :windows_10_firefox_49,
+    :windows_7_ie_11,
+    :os_x_10_11_safari_10,
+    :os_x_10_10_chrome_54
+] do
+  puts 'Running automation'
 end
