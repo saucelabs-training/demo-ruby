@@ -7,7 +7,12 @@ end
 task default: :test_sauce
 
 task :parallel_run do
-  system 'parallel_split_test spec'
+  begin
+    @success = true if @success.nil?
+    @result = system 'parallel_split_test spec'
+  ensure
+    @success &= @result
+  end
 end
 
 task :windows_10_edge_14 do
@@ -62,5 +67,5 @@ multitask :test_sauce => [
     :os_x_10_11_safari_10,
     :os_x_10_10_chrome_54
 ] do
-  puts 'Running automation'
+  raise StandardError, "Tests failed!" unless @success
 end
