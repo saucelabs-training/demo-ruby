@@ -12,7 +12,8 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
     Capybara.register_driver :selenium do |app|
-      build_name = ENV['JENKINS_BUILD_NUMBER'] ||
+      build_name = "Ruby-RSpec-Capybara-#{ENV['TRAVIS_JOB_NUMBER']}" ||
+          ENV['JENKINS_BUILD_NUMBER'] ||
           ENV['SAUCE_BAMBOO_BUILDNUMBER'] ||
           ENV['SAUCE_TC_BUILDNUMBER'] ||
           ENV['SAUCE_BUILD_NAME'] ||
