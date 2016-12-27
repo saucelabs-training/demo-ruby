@@ -1,3 +1,5 @@
+task default: :test_sauce
+
 def run_tests(platform, browser, version, junit_dir)
   system("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" JUNIT_DIR=\"#{junit_dir}\" parallel_rspec spec")
 end
