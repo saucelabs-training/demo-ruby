@@ -12,7 +12,7 @@ end
 
 task :windows_10_edge_14 do
   ENV['platform'] = 'Windows 10'
-  ENV['browserName'] = 'edge'
+  ENV['browserName'] = 'MicrosoftEdge'
   ENV['version'] = '14.14393'
   ENV['JUNIT_DIR'] = 'junit_reports/windows_10_edge_14'
 
@@ -30,7 +30,7 @@ end
 
 task :windows_7_ie_11 do
   ENV['platform'] = 'Windows 7'
-  ENV['browserName'] = 'internet_explorer'
+  ENV['browserName'] = 'internet Explorer'
   ENV['version'] = '11.0'
   ENV['JUNIT_DIR'] = 'junit_reports/windows_7_ie_11'
 
