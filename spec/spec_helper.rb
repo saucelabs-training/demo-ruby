@@ -17,7 +17,7 @@ RSpec.configure do |config|
           browserName: ENV['browserName'],
           platform: ENV['platform'],
           name: example.description,
-          build: ENV['BUILD_TAG'] || "Unknown Build"
+          build: ENV['BUILD_TAG'] || "Unknown Build - #{Time.now.to_i}",
       }
       url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 
