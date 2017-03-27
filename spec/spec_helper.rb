@@ -36,11 +36,11 @@ RSpec.configure do |config|
     # Output sessionId and jobname to std out for Sauce OnDemand Plugin to display embeded results
     @session_id = @driver.browser.session_id
     puts "SauceOnDemandSessionID=#{@session_id} job-name=#{jobname}"
-
-
   end
 
   config.after(:each) do | scenario |
+    @driver.quit
+    Capybara.use_default_driver
     if scenario.exception
       SauceWhisk::Jobs.fail_job @session_id
     else
