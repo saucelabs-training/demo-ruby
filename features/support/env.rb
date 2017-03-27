@@ -2,40 +2,45 @@ require "capybara/cucumber"
 require "selenium/webdriver"
 require 'sauce_whisk'
 
-Around do |scenario, block|
-  block.call
-  sessionid = ::Capybara.current_session.driver.browser.session_id
-  ::Capybara.current_session.driver.quit
+Capybara.default_max_wait_time = 10
+Capybara.default_driver = :selenium
 
-  # sessionid = Capybara.current_session.driver.browser.session_id
-  jobname = "#{scenario.feature.name} - #{scenario.name}"
 
-  # Output sessionId and jobname to std out for Sauce OnDemand Plugin to display embeded results
-  puts "SauceOnDemandSessionID=#{sessionid} job-name=#{jobname}"
-
-  job = SauceWhisk::Jobs.fetch sessionid
-  job.name = jobname
-  job.passed = scenario.passed? ? true : false
-  job.save
-end
 
 Before do | scenario |
-  Capybara.register_driver :selenium do |app|
+  jobname = "#{scenario.feature.name} - #{scenario.name}"
+
+  Capybara.register_driver :selenium do | app|
     capabilities = {
       :version => ENV['version'],
       :browserName => ENV['browserName'],
-      :platform => ENV['platform']
+      :platform => ENV['platform'],
+      :name => jobname
     }
-
     url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
+
     Capybara::Selenium::Driver.new(app,
                                    :browser => :remote, :url => url,
                                    :desired_capabilities => capabilities)
   end
-  Capybara.default_wait_time = 10
-  Capybara.current_driver = :selenium
 
-  job = SauceWhisk::Jobs.fetch ::Capybara.current_session.driver.browser.session_id
-  job.name = "#{scenario.feature.name} - #{scenario.name}"
-  job.save
+  # Capybara.current_driver = :remote
+  Capybara.session_name = "#{jobname} - #{ENV['platform']} - " +
+    "#{ENV['browserName']} - #{ENV['version']}"
+
+  @driver = Capybara.current_session.driver
+
+  # Output sessionId and jobname to std out for Sauce OnDemand Plugin to display embeded results
+  @session_id = @driver.browser.session_id
+  puts "SauceOnDemandSessionID=#{@session_id} job-name=#{jobname}"
+end
+
+After do | scenario |
+  @driver.quit
+  Capybara.use_default_driver
+  if scenario.exception
+    SauceWhisk::Jobs.fail_job @session_id
+  else
+    SauceWhisk::Jobs.pass_job @session_id
+  end
 end
