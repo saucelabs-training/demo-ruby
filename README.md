@@ -41,7 +41,7 @@ Tests in Parallel:
 	$ rake test_sauce
 	```
 
-[Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard/)
+[Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard)
 
 ### Advice/Troubleshooting
 
