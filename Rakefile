@@ -23,7 +23,8 @@ task :parallel_run do
 end
 
 desc "Run multiple platforms simultaneously"
-multitask sauce_demo: %w[windows_10_edge windows_8_ie mac_sierra_chrome windows_7_ff] do
+# TODO - add in windows_8_ie once Sample App is fixed
+multitask sauce_demo: %w[windows_10_edge mac_sierra_chrome windows_7_ff] do
   begin
     raise StandardError, "Tests failed!" unless @success
   ensure

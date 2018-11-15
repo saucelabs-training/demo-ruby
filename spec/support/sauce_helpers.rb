@@ -9,7 +9,10 @@ module SauceHelpers
       capabilities[key] = value
     end
 
-    capabilities[:url] = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub"
+    capabilities[:url] = "https://ondemand.saucelabs.com:443/wd/hub"
+    capabilities[:username] = ENV['SAUCE_USERNAME']
+    capabilities[:accessKey] = ENV['SAUCE_ACCESS_KEY']
+
     @browser = Watir::Browser.new capabilities.delete('browser_name'), capabilities
   end
 
