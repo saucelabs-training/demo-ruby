@@ -1,9 +1,6 @@
 require 'rspec/core/rake_task'
 @success = true
-
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-end
+ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '10'
 
 %w[windows_10_edge windows_8_ie mac_sierra_chrome windows_7_ff].each do |platform|
   desc "Run tests in parallel within suite using #{platform}"
