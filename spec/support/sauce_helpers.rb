@@ -3,15 +3,12 @@ require 'sauce_whisk'
 module SauceHelpers
   def initialize_browser(name)
     opt = {name: name,
-                    build: build_name}
+           build: build_name,
+           url: "https://ondemand.saucelabs.com:443/wd/hub",
+           username: ENV['SAUCE_USERNAME'],
+           accessKey: ENV['SAUCE_ACCESS_KEY']}
 
-    YAML.safe_load(IO.read('spec/support/platforms.yml'))[platform].each do |key, value|
-      opt[key] = value
-    end
-
-    opt[:url] = "https://ondemand.saucelabs.com:443/wd/hub"
-    opt[:username] = ENV['SAUCE_USERNAME']
-    opt[:accessKey] = ENV['SAUCE_ACCESS_KEY']
+    opt.merge! YAML.safe_load(IO.read('spec/support/platforms.yml'))[platform]
 
     @browser = Watir::Browser.new opt.delete('browser_name'), opt
   end
