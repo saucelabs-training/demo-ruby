@@ -12,7 +12,7 @@ end
 desc "Run tests in parallel within suite using default platform"
 task :parallel_run do
   begin
-    @result = system "parallel_cucumber features/ -n 10"
+    @result = system "parallel_cucumber features/ -n 10 --group-by scenarios"
   ensure
     @success &= @result
   end

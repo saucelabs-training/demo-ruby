@@ -8,7 +8,7 @@ module SauceHelpers
            username: ENV['SAUCE_USERNAME'],
            accessKey: ENV['SAUCE_ACCESS_KEY']}
 
-    opt.merge! YAML.safe_load(IO.read('spec/support/platforms.yml'))[platform]
+    opt.merge! YAML.safe_load(IO.read('features/support/platforms.yml'))[platform]
 
     @browser = Watir::Browser.new opt.delete('browser_name'), opt
   end

@@ -6,7 +6,7 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 
 1. Global Dependencies
     * [Install Ruby](http://watir.com/guides/ruby/)
-    * [Install Git](https://github.com/address-book/junit_tests#install-git)
+    * [Install Git](https://github.com/saucelabs-training/Getting-Started-with-Selenium/blob/master/README.md#install-git)
     * Clone This Repo
     ```
     $ git clone ruby-rspec-watir https://github.com/saucelabs-sample-test-frameworks/Ruby-RSpec-Watir.git
@@ -46,4 +46,4 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 
 ### Watch Your Tests Run
 
-[Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard/)
+[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard/)
