@@ -1,10 +1,10 @@
 source "https://www.rubygems.org"
 
-gem 'cucumber', '>=2.0.0'
+gem 'cucumber'
 gem 'rspec'
+gem 'sauce_whisk'
 gem 'capybara'
 gem 'parallel_tests'
-gem 'page-object'
-gem 'require_all'
-gem 'sauce_whisk'
+gem 'selenium-webdriver'
 gem 'rake'
+gem 'json', '~> 2.0'
