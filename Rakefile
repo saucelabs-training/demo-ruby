@@ -1,39 +1,29 @@
+require 'rspec/core/rake_task'
 @success = true
 
-def run_tests(platform, browser, version, junit_dir)
-  sh("platform=\"#{platform}\" browserName=\"#{browser}\" version=\"#{version}\" parallel_cucumber features --group-by scenarios -o \"--format junit --out #{junit_dir} --format pretty\" -n 20") do | success, _exit_code |
-    @success &= success
+%w[windows_10_edge windows_8_ie mac_sierra_chrome windows_7_ff].each do |platform|
+  desc "Run tests in parallel within suite using #{platform}"
+  task platform.to_s do
+    ENV['PLATFORM'] = platform
+    Rake::Task[:parallel_run].execute
   end
 end
 
-task :default => [:test_sauce]
-
-task :windows_10_edge_14 do
-  run_tests('Windows 10', 'edge', '14.14393', 'junit_reports/windows_10_edge_14')
+desc "Run tests in parallel within suite using default platform"
+task :parallel_run do
+  begin
+    @result = system "parallel_cucumber features/ -n 10"
+  ensure
+    @success &= @result
+  end
 end
 
-task :windows_10_firefox_49 do
-  run_tests('Windows 10', 'firefox', '49.0', 'junit_reports/windows_10_firefox_49')
-end
-
-task :windows_7_ie_11 do
-  run_tests('Windows 7', 'internet_explorer', '11.0', 'junit_reports/windows_7_ie_11')
-end
-
-task :os_x_10_11_safari_10 do
-  run_tests('OS X 10.11', 'safari', '10.0', 'junit_reports/os_x_10_11_safari_10')
-end
-
-task :os_x_10_10_chrome_54 do
-  run_tests('OS X 10.10', 'chrome', '54.0', 'junit_reports/os_x_10_10_chrome_54')
-end
-
-multitask :test_sauce => [
-    :windows_10_edge_14,
-    :windows_10_firefox_49,
-    :windows_7_ie_11,
-    :os_x_10_11_safari_10,
-    :os_x_10_10_chrome_54
-  ] do
+desc "Run multiple platforms simultaneously"
+# TODO - add in windows_8_ie once Sample App is fixed
+multitask sauce_demo: %w[windows_10_edge mac_sierra_chrome windows_7_ff] do
+  begin
     raise StandardError, "Tests failed!" unless @success
+  ensure
+    @success &= @result
   end
+end
