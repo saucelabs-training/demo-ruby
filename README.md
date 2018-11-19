@@ -1,21 +1,16 @@
 ## Ruby-RSpec-Capybara
 [![Travis Status](https://travis-ci.org/saucelabs-sample-test-frameworks/Ruby-RSpec-Capybara.svg?branch=master)](https://travis-ci.org/saucelabs-sample-test-frameworks/Ruby-RSpec-Capybara)
 
-This code is provided on an "AS-IS” basis without warranty of any kind, either express or implied, including without limitation any implied warranties of condition, uninterrupted use, merchantability, fitness for a particular purpose, or non-infringement. Your tests and testing environments may require you to modify this framework. Issues regarding this framework should be submitted through GitHub. For questions regarding Sauce Labs integration, please see the Sauce Labs documentation at https://wiki.saucelabs.com/. This framework is not maintained by Sauce Labs Support.
-
 ### Environment Setup
 
 1. Global Dependencies
-    * Install [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
-    * Or Install Ruby with [Homebrew](http://brew.sh/)
+    * [Install Ruby](http://watir.com/guides/ruby/)
+    * [Install Git](https://github.com/address-book/junit_tests#install-git)
+    * Clone This Repo
     ```
-    $ brew install ruby
+    $ git clone ruby-rspec-watir https://github.com/saucelabs-sample-test-frameworks/Ruby-RSpec-Watir.git
     ```
-    * Install [Rake](http://docs.seattlerb.org/rake/)
-    ```
-    $ gem install rake
-    ```
-    * Install bundler (Sudo may be necessary)
+    * Install bundler
     ```
     $ gem install bundler
     ```
@@ -28,35 +23,26 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     ```
 
 3. Project Dependencies
-	* Install packages (Use sudo if necessary)
+	* Install packages
 	```
 	$ bundle install
 	```
 
 ### Running Tests
 
-Tests in Parallel:
+* Tests in Parallel:
 	```
-	$ rake test_sauce
+	$ rake parallel_run
 	```
+* Specific Configuration (see `/spec/support/platforms.yml` file)
+	```
+	$ rake mac_sierra_chrome
+	```
+* Demo Mode
+	```
+	$ rake sauce_demo
+	```
+
+### Watch Your Tests Run
 
 [Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard/)
-
-### Advice/Troubleshooting
-
-1. There may be additional latency when using a remote webdriver to run tests on Sauce Labs. Timeouts or Waits may need to be increased.
-    * [Selenium tips regarding explicit waits](https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Explicit+Waits)
-
-### Resources
-##### [Sauce Labs Documentation](https://wiki.saucelabs.com/)
-
-##### [SeleniumHQ Documentation](http://www.seleniumhq.org/docs/)
-
-##### [RSpec Documentation](http://rspec.info/documentation/)
-
-##### [Capybara Documentation](https://github.com/jnicklas/capybara)
-
-##### [Ruby Documentation](http://ruby-doc.org/)
-
-##### [Stack Overflow](http://stackoverflow.com/)
-* A great resource to search for issues not explicitly covered by documentation.

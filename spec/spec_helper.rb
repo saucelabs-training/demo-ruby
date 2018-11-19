@@ -1,38 +1,24 @@
 require "capybara"
 require "capybara/rspec"
+require "selenium-webdriver"
 require "rspec"
 require "sauce_whisk"
-
+require_relative "support/sauce_helpers"
 
 Capybara.default_max_wait_time = 10
 
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Capybara::RSpecMatchers
+  config.include SauceHelpers
 
   config.before(:each) do |example|
-    Capybara.register_driver :selenium do |app|
-      capabilities = {
-          version: ENV['version'],
-          browserName: ENV['browserName'],
-          platform: ENV['platform'],
-          name: example.description,
-          build: ENV['BUILD_TAG'] || "Unknown Build - #{Time.now.to_i}",
-      }
-      url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
-
-      Capybara::Selenium::Driver.new(app, {browser: :remote,
-                                           url: url,
-                                           desired_capabilities: capabilities})
-    end
-    Capybara.current_driver = :selenium
+    initialize_browser(example.description)
   end
 
-
   config.after(:each) do |example|
-    session_id = ::Capybara.current_session.driver.browser.session_id
-    ::Capybara.current_session.driver.quit
-
-    SauceWhisk::Jobs.change_status(session_id, example.exception.nil?)
+    session_id = @driver.browser.session_id
+    submit_results(session_id, !example.exception)
+    @driver.quit
   end
 end
