@@ -5,16 +5,13 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 ### Environment Setup
 
 1. Global Dependencies
-    * [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/)
-    * Or Install Ruby with [Homebrew](http://brew.sh/)
+    * [Install Ruby](http://watir.com/guides/ruby/)
+    * [Install Git](https://github.com/saucelabs-training/Getting-Started-with-Selenium/blob/master/README.md#install-git)
+    * Clone This Repo
     ```
-    $ brew install ruby
+    $ git clone ruby-rspec-watir https://github.com/saucelabs-sample-test-frameworks/Ruby-RSpec-Watir.git
     ```
-    * Install [Rake](http://docs.seattlerb.org/rake/)
-    ```
-    $ gem install rake
-    ```
-    * Install bundler (Sudo may be necessary)
+    * Install bundler
     ```
     $ gem install bundler
     ```
@@ -25,37 +22,28 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     $ export SAUCE_USERNAME=<your Sauce Labs username>
 	$ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
     ```
+
 3. Project Dependencies
-	* Install packages (Use sudo if necessary)
+	* Install packages
 	```
 	$ bundle install
 	```
-    * Set Build ID (Optional)
-    ```
-    $ export BUILD_TAG=sauce_automated_build_name
-    ```
+
 ### Running Tests
 
-Tests in Parallel:
+* Tests in Parallel:
 	```
-	$ rake test_sauce
+	$ rake parallel_run
+	```
+* Specific Configuration (see `/spec/support/platforms.yml` file)
+	```
+	$ rake mac_sierra_chrome
+	```
+* Demo Mode
+	```
+	$ rake sauce_demo
 	```
 
-[Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard)
+### Watch Your Tests Run
 
-### Advice/Troubleshooting
-
-1. There may be additional latency when using a remote webdriver to run tests on Sauce Labs. Timeouts or Waits may need to be increased.
-    * [Selenium tips regarding explicit waits](https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Explicit+Waits)
-
-### Resources
-##### [Sauce Labs Documentation](https://wiki.saucelabs.com/)
-
-##### [SeleniumHQ Documentation](http://www.seleniumhq.org/docs/)
-
-##### [RSpec Documentation](http://rspec.info/documentation/)
-
-##### [Ruby Documentation](http://ruby-doc.org/)
-
-##### [Stack Overflow](http://stackoverflow.com/)
-* A great resource to search for issues not explicitly covered by documentation.
+[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard/)
