@@ -4,12 +4,11 @@ describe "Authentication" do
   before { visit 'http://www.saucedemo.com' }
 
   it "successful" do
+    fill_in 'Username', with: 'standard_user'
+    fill_in 'Password', with: 'secret_sauce'
 
-    first('[data-test=username]').send_keys 'standard_user'
-    first('[data-test=password]').send_keys 'secret_sauce'
+    click_button('LOGIN')
 
-    first('[type=submit]').click
-
-    expect(current_url).to eq 'https://www.saucedemo.com/inventory.html'
+    expect(page).to have_current_path('https://www.saucedemo.com/inventory.html')
   end
 end
