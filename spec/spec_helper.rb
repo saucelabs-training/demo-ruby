@@ -34,7 +34,6 @@ RSpec.configure do |config|
     opt.merge! platform
 
     @browser = Watir::Browser.new opt.delete('browser_name'), opt
-    Watir.logger.warn "Session ID: #{@browser.wd.session_id}"
   end
 
   config.after(:each) do |example|
