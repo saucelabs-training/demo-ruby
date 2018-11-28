@@ -1,15 +1,37 @@
 require "watir"
-require_relative "support/sauce_helpers"
+require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.include SauceHelpers
+  def platforms
+    YAML.safe_load(IO.read('spec/platforms.yml'))
+  end
+
+  def platform
+    platforms[ENV['PLATFORM']] || platforms.first
+  end
+
+  def build_name
+    %w[TRAVIS_JOB_NUMBER SAUCE_BAMBOO_BUILDNUMBER CIRCLE_BUILD_NUM BUILD_TAG"].each do |var|
+      return ENV[var] if ENV.key?(var)
+    end
+    "Local Execution - #{Time.now.to_i}"
+  end
 
   config.before(:each) do |test|
-    @browser = initialize_browser(test.full_description)
+    opt = {name: test.full_description,
+           build: build_name,
+           url: "https://ondemand.saucelabs.com:443/wd/hub",
+           username: ENV['SAUCE_USERNAME'],
+           accessKey: ENV['SAUCE_ACCESS_KEY']}
+
+    opt.merge! platform
+
+    @browser = Watir::Browser.new opt.delete('browser_name'), opt
   end
 
   config.after(:each) do |example|
-    submit_results(@browser.wd.session_id, !example.exception)
+    SauceWhisk::Jobs.change_status(@browser.wd.session_id, !example.exception)
+
     @browser.quit
   end
 end
