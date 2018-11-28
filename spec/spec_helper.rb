@@ -11,7 +11,9 @@ RSpec.configure do |config|
   end
 
   def build_name
-    if ENV['TRAVIS_JOB_NUMBER']
+    if ENV['BUILD_NAME']
+      ENV['BUILD_NAME']
+    elsif ENV['TRAVIS_JOB_NUMBER']
       "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
     elsif ENV['SAUCE_BAMBOO_BUILDNUMBER']
       ENV['SAUCE_BAMBOO_BUILDNUMBER']
