@@ -11,10 +11,17 @@ RSpec.configure do |config|
   end
 
   def build_name
-    %w[TRAVIS_JOB_NUMBER SAUCE_BAMBOO_BUILDNUMBER CIRCLE_BUILD_NUM BUILD_TAG"].each do |var|
-      return ENV[var] if ENV.key?(var)
+    if ENV['TRAVIS_JOB_NUMBER']
+      "#{ENV['TRAVIS_JOB_NAME']}: #{ENV['TRAVIS_JOB_NUMBER']}"
+    elsif ENV['SAUCE_BAMBOO_BUILDNUMBER']
+      ENV['SAUCE_BAMBOO_BUILDNUMBER']
+    elsif ENV['CIRCLE_BUILD_NUM']
+      "#{ENV['CIRCLE_JOB']}: #{ENV['CIRCLE_BUILD_NUM']}"
+    elsif ENV['BUILD_TAG']
+      ENV['BUILD_TAG']
+    else
+      "Local Execution - #{Time.now.to_i}"
     end
-    "Local Execution - #{Time.now.to_i}"
   end
 
   config.before(:each) do |test|
@@ -27,6 +34,7 @@ RSpec.configure do |config|
     opt.merge! platform
 
     @browser = Watir::Browser.new opt.delete('browser_name'), opt
+    Watir.logger.warn "Session ID: #{@browser.wd.session_id}"
   end
 
   config.after(:each) do |example|
