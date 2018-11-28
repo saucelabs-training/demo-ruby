@@ -12,7 +12,7 @@ RSpec.configure do |config|
   config.include Capybara::RSpecMatchers
 
   def platforms
-    YAML.safe_load(IO.read('spec/platforms.yml'))
+    YAML.safe_load(IO.read('platforms.yml'))
   end
 
   def platform
