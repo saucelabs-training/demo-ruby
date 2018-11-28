@@ -42,8 +42,7 @@ RSpec.configure do |config|
              username: ENV['SAUCE_USERNAME'],
              accessKey: ENV['SAUCE_ACCESS_KEY']}
 
-      opt.merge! YAML.safe_load(IO.read('spec/support/platforms.yml'))[platform]
-
+      opt.merge! platform
       caps = Selenium::WebDriver::Remote::Capabilities.send(opt.delete('browser_name').to_sym, opt)
 
       url = 'https://ondemand.saucelabs.com:443/wd/hub'
