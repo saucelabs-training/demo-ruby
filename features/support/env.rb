@@ -2,7 +2,7 @@ require 'capybara/cucumber'
 require 'selenium-webdriver'
 
 def platforms
-  YAML.safe_load(IO.read('platforms.yml'))
+  YAML.safe_load(IO.read('features/support/platforms.yml'))
 end
 
 def platform
