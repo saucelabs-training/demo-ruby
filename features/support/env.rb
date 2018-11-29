@@ -4,7 +4,7 @@ require 'sauce_whisk'
 
 Before do |scenario|
   def platforms
-    YAML.safe_load(IO.read('platforms.yml'))
+    YAML.safe_load(IO.read('features/support/platforms.yml'))
   end
 
   def platform
