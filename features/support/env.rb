@@ -1,5 +1,6 @@
 require 'capybara/cucumber'
 require 'selenium-webdriver'
+require 'sauce_whisk'
 
 def platforms
   YAML.safe_load(IO.read('features/support/platforms.yml'))
