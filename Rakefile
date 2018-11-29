@@ -7,14 +7,14 @@ PLATFORMS = %w[windows_10_edge mac_sierra_chrome windows_7_ff]
 
 PLATFORMS.each do |platform|
   desc "Run tests in parallel within suite using #{platform}"
-  task platform.to_s do
+  task platform do
     ENV['PLATFORM'] = platform
     system 'parallel_split_test spec'
   end
 end
 
 task :default do
-  Rake::Task[:mac_sierra_chrome].execute
+  Rake::Task[PLATFORMS.first].execute
 end
 
 
