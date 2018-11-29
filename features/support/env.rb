@@ -1,5 +1,6 @@
 require 'watir'
 require 'rspec'
+require 'sauce_whisk'
 
 Before do |scenario|
   def platforms
