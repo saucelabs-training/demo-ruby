@@ -1,0 +1,18 @@
+# Configuration parameters: CountComments, ExcludedMethods.
+# ExcludedMethods: refine
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+# Configuration parameters: CountComments, ExcludedMethods.
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
+# URISchemes: http, https
+Metrics/LineLength:
+  Max: 100
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space

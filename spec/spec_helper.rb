@@ -1,14 +1,15 @@
-require "selenium-webdriver"
-require "sauce_whisk"
+# frozen_string_literal: true
+
+require 'selenium-webdriver'
+require 'sauce_whisk'
 
 RSpec.configure do |config|
-
   config.before(:each) do |test|
     options = platform(test.full_description)
 
     browser = options.delete(:browser_name)
     capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
-    url = "https://ondemand.saucelabs.com:443/wd/hub"
+    url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
     @driver = Selenium::WebDriver.for(:remote, url: url, desired_capabilities: capabilities)
   end
@@ -28,13 +29,13 @@ RSpec.configure do |config|
       {selenium_version: '3.141.59',
        platform: 'Windows 10',
        browser_name: 'edge',
-       version: '16.16299'}.merge(sauce_oss name)
+       version: '16.16299'}.merge(sauce_oss(name))
     when 'windows_8_ie'
       # Note: w3c is not working for Windows 8 & IE 11
       {platform: 'Windows 8.1',
        browser_name: 'ie',
        selenium_version: '3.141.59',
-       version: '11.0'}.merge(sauce_oss name)
+       version: '11.0'}.merge(sauce_oss(name))
     when 'mac_sierra_chrome'
       # This is for running with w3c which is not yet the default
       #   {platform_name: 'macOS 10.12',
@@ -44,21 +45,21 @@ RSpec.configure do |config|
       {selenium_version: '3.141.59',
        platform: 'macOS 10.12',
        browser_name: 'chrome',
-       version: '65.0'}.merge(sauce_oss name)
+       version: '65.0'}.merge(sauce_oss(name))
     when 'mac_mojave_safari'
       {platform_name: 'macOS 10.14',
        browser_name: 'safari',
-       browser_version: '12.0'}.merge(sauce_w3c name)
+       browser_version: '12.0'}.merge(sauce_w3c(name))
     when 'windows_7_ff'
       {platform_name: 'Windows 7',
        browser_name: 'firefox',
-       browser_version: '60.0'}.merge(sauce_w3c name)
+       browser_version: '60.0'}.merge(sauce_w3c(name))
     else
       # Always specify a default
       {selenium_version: '3.141.59',
        platform: 'macOS 10.12',
        browser_name: 'chrome',
-       version: '65.0'}.merge(sauce_oss name)
+       version: '65.0'}.merge(sauce_oss(name))
     end
   end
 

@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Cart" do
+require 'spec_helper'
+
+describe 'Cart' do
   before { @driver.get 'https://www.saucedemo.com/inventory.html' }
 
-  it "removes one" do
+  it 'removes one' do
     @driver.find_element(class: 'add-to-cart-button').click
     @driver.find_element(class: 'add-to-cart-button').click
 
