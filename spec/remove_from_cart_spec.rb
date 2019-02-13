@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Cart" do
-  before { @driver.get 'http://www.saucedemo.com/inventory.html' }
+  before { @driver.get 'https://www.saucedemo.com/inventory.html' }
 
   it "removes one" do
     @driver.find_element(class: 'add-to-cart-button').click

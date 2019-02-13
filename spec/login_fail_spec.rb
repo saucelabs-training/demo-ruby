@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Authentication" do
-  before { @driver.get 'http://www.saucedemo.com' }
+  before { @driver.get 'https://www.saucedemo.com' }
 
   it "fails" do
     @driver.find_element(css: "[data-test='username']").send_keys 'locked_out_user'
