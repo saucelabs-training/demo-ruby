@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Authentication" do
-  before { @driver.get 'http://www.saucedemo.com' }
+require 'spec_helper'
 
-  it "successful" do
+describe 'Authentication' do
+  before { @driver.get 'https://www.saucedemo.com' }
+
+  it 'successful' do
     @driver.find_element(css: "[data-test='username']").send_keys 'standard_user'
     @driver.find_element(css: "[data-test='password']").send_keys 'secret_sauce'
     @driver.find_element(css: "[type='submit']").click
