@@ -71,7 +71,16 @@ RSpec.configure do |config|
 
   def sauce_oss(name)
     {name: name,
+     build: build_name,
      username: ENV['SAUCE_USERNAME'],
      access_key: ENV['SAUCE_ACCESS_KEY']}
+  end
+
+  #
+  # Note that this build name is specifically for Travis CI execution
+  # Most CI tools have ENV variables that can be structured to provide useful build names
+  #
+  def build_name
+    "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
   end
 end
