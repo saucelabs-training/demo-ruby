@@ -27,9 +27,9 @@ RSpec.configure do |config|
     case ENV['PLATFORM']
     when 'windows_10_edge'
       {selenium_version: '3.141.59',
-       platform: 'Windows 10',
+       platform_name: 'Windows 10',
        browser_name: 'edge',
-       version: '16.16299'}.merge(sauce_oss(name))
+       browser_version: '18.17763'}.merge(sauce_w3c(name))
     when 'windows_8_ie'
       # Note: w3c is not working for Windows 8 & IE 11
       {platform: 'Windows 8.1',
@@ -81,6 +81,10 @@ RSpec.configure do |config|
   # Most CI tools have ENV variables that can be structured to provide useful build names
   #
   def build_name
-    "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
+    if ENV['TRAVIS_REPO_SLUG']
+      "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
+    else
+      "Ruby-RSpec-Selenium: Local-#{Time.now.to_i}"
+    end
   end
 end
