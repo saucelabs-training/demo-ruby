@@ -83,6 +83,8 @@ RSpec.configure do |config|
   def build_name
     if ENV['TRAVIS_REPO_SLUG']
       "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
+    elsif ENV['SAUCE_START_TIME']
+      ENV['SAUCE_START_TIME']
     else
       "Ruby-RSpec-Selenium: Local-#{Time.now.to_i}"
     end
