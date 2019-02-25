@@ -24,7 +24,8 @@ describe "Instant_RSpec_Test3" do
         # use sauce:options to handle all saucelabs.com-specific capabilities such as:
         # username, accesskey, build number, test name, timeouts etc.
         "sauce:options" => {
-            name: test.full_description,
+            build: 'Onboarding Sample App - Ruby',
+            name: '3-cross-browser',
             seleniumVersion: '3.141.59',
             username: ENV['SAUCE_USERNAME'],
             accessKey: ENV['SAUCE_ACCESS_KEY']

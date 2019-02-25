@@ -10,12 +10,11 @@ describe "Instant_RSpec_Test4" do
         browser_version: '71.0',
         "goog:chromeOptions" => {w3c: true},
         "sauce:options" => {
-            name: test.full_description,
+            build: 'Onboarding Sample App - Ruby',
+            name: '4-best-practices',
             seleniumVersion: '3.141.59',
             username: ENV['SAUCE_USERNAME'],
             accessKey: ENV['SAUCE_ACCESS_KEY'],
-            # best practices involve setting a build number for version control
-            build: 'build-0.0.1',
             # tags to filter test reporting.
             tags: ['instant-sauce', 'ruby-rspec', 'module4'],
             # setting sauce-runner specific parameters such as timeouts helps

@@ -21,7 +21,8 @@ describe "Instant_RSpec_Test2" do
         # the sauce:options field allows us to define sauce labs-specific test parameters
         # such as: sauce username and access key, timeouts, selenium version etc.
         "sauce:options" => {
-            name: test.full_description,
+            build: 'Onboarding Sample App - Ruby',
+            name: '2-user-site',
             seleniumVersion: '3.141.59',
             username: ENV['SAUCE_USERNAME'],
             accessKey: ENV['SAUCE_ACCESS_KEY']

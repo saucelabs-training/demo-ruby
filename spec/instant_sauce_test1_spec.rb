@@ -9,7 +9,9 @@ require 'selenium/webdriver'
 caps = {
     platform: 'macOS 10.13',
     browserName: 'Safari',
-    version: '11.1'
+    version: '11.1',
+    build: 'Onboarding Sample App - Ruby',
+    name: '1-first-test'
 }
 driver = Selenium::WebDriver.for(:remote,
                                  url: 'https://SAUCE_USERNAME:SAUCE_ACCESS_KEY@ondemand.saucelabs.com:443/wd/hub',
