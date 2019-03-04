@@ -8,10 +8,12 @@ RSpec.configure do |config|
     options = platform(test.full_description)
 
     browser = options.delete(:browser_name)
-    capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(options)
     url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
-    @driver = Selenium::WebDriver.for(:remote, url: url, desired_capabilities: capabilities)
+    @driver = Selenium::WebDriver.for(:remote, url: url,
+                                      desired_capabilities: capabilities,
+                                      options: Selenium::WebDriver::Chrome::Options.new(args: ['']))
   end
 
   config.after(:each) do |example|
@@ -22,6 +24,9 @@ RSpec.configure do |config|
   #
   # Note that having this as a conditional in the test code is less ideal
   # It is better for static data to be pulled from a serialized file like a yaml
+  #
+  # Note: not all browsers are defaulting to using w3c protocol
+  # This will change soon. Where possible prefer the w3c approach
   #
   def platform(name)
     case ENV['PLATFORM']
@@ -37,11 +42,11 @@ RSpec.configure do |config|
        selenium_version: '3.141.59',
        version: '11.0'}.merge(sauce_oss(name))
     when 'mac_sierra_chrome'
-      # This is for running with w3c which is not yet the default
-      #   {platform_name: 'macOS 10.12',
-      #    browser_name: 'chrome',
-      #    "goog:chromeOptions": {w3c: true},
-      #    browser_version: '65.0'}.merge(sauce_w3c name)
+      # This is for running Chrome with w3c which is not yet the default
+      {platform_name: 'macOS 10.12',
+       browser_name: 'chrome',
+       "goog:chromeOptions": {w3c: true},
+       browser_version: '65.0'}.merge(sauce_w3c name)
       {selenium_version: '3.141.59',
        platform: 'macOS 10.12',
        browser_name: 'chrome',
@@ -64,9 +69,16 @@ RSpec.configure do |config|
   end
 
   def sauce_w3c(name)
-    w3c_opts = sauce_oss(name)
-    w3c_opts[:selenium_version] = '3.141.59'
-    {'sauce:options' => w3c_opts}
+    {platform_name: 'macOS 10.12',
+     browser_name: 'chrome',
+     browser_version: '65.0',
+     "goog:chromeOptions": {w3c: true},
+     "sauce:options": {selenium_version: '3.141.59',
+                       name: name,
+                       build: build_name,
+                       username: ENV['SAUCE_USERNAME'],
+                       access_key: ENV['SAUCE_ACCESS_KEY']}
+    }
   end
 
   def sauce_oss(name)
