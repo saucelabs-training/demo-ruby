@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+#
+# This is an example of Imperative Test code to keep things simple
+# Your tests should be written declaritively
+# This means adding abstractions for Page Objects and Data Objects that will do all of the work.
+#
 require 'spec_helper'
 
 describe 'Cart' do
