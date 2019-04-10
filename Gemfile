@@ -1,10 +1,9 @@
 source "https://www.rubygems.org"
 
 gem 'rspec'
-gem 'sauce_whisk'
 gem 'capybara'
-gem 'parallel_split_test'
-gem 'require_all'
 gem 'selenium-webdriver'
+gem 'parallel_split_test'
 gem 'rake'
-gem 'json', '~> 2.0'
+gem 'rubocop'
+gem 'sauce_whisk'
