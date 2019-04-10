@@ -4,9 +4,9 @@ describe "Cart" do
   before { visit 'http://www.saucedemo.com/inventory.html' }
 
   it "removes one" do
-    first('.add-to-cart-button').click
-    first('.add-to-cart-button').click
-    first('.remove-from-cart-button').click
+    first('.btn_primary').click
+    first('.btn_primary').click
+    first('.btn_secondary').click
 
     expect(page).to have_css('.shopping_cart_badge', exact_text: '1')
     visit 'https://www.saucedemo.com/cart.html'

@@ -4,7 +4,7 @@ describe "Cart" do
   before { visit 'http://www.saucedemo.com/inventory.html'}
 
   it "adds one" do
-    first('.add-to-cart-button').click
+    first('.btn_primary').click
 
     expect(page).to have_css('.shopping_cart_badge', exact_text: '1')
     visit 'https://www.saucedemo.com/cart.html'
@@ -12,8 +12,8 @@ describe "Cart" do
   end
 
   it "adds two" do
-    first('.add-to-cart-button').click
-    first('.add-to-cart-button').click
+    first('.btn_primary').click
+    first('.btn_primary').click
 
     expect(page).to have_css('.shopping_cart_badge', exact_text: '2')
     visit 'https://www.saucedemo.com/cart.html'
