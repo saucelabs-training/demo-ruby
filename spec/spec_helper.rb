@@ -18,7 +18,7 @@ RSpec.configure do |config|
 
       url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
-      @driver = Capybara::Selenium::Driver.new(app, {browser: :remote,
+      Capybara::Selenium::Driver.new(app, {browser: :remote,
                                                      url: url,
                                                      desired_capabilities: caps})
     end
@@ -26,8 +26,10 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do |example|
-    SauceWhisk::Jobs.change_status(@driver.browser.session_id, !example.exception)
-    @driver.quit
+    session_id = Capybara.current_session.driver.browser.session_id
+    puts "Driver Session ID: #{session_id}"
+    SauceWhisk::Jobs.change_status(session_id, !example.exception)
+    Capybara.current_session.quit
   end
 
 
