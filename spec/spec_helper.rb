@@ -1,4 +1,6 @@
-require "watir"
+# frozen_string_literal: true
+
+require 'watir'
 require 'sauce_whisk'
 
 RSpec.configure do |config|

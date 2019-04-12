@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 require 'rspec/core/rake_task'
-ENV['SAUCE_START_TIME'] = "Ruby-Watir-Selenium: Local-#{Time.now.to_i}"
+
+#
+# For use in building a unique Build Name for Sauce Labs
+#
+ENV['SAUCE_START_TIME'] = "Ruby-RSpec-Selenium: Local-#{Time.now.to_i}"
 
 #
 # Uses parallel-split-test gem to set the number of tests that get run in parallel
@@ -74,7 +78,9 @@ end
 
 desc 'Sauce Labs Demo to run multiple platforms simultaneously'
 multitask sauce_demo: PLATFORMS.map { |p| "#{p}_demo" } do
-  raise StandardError, 'Tests failed!' unless @success
-ensure
-  @success &= @result
+  begin
+    raise StandardError, 'Tests failed!' unless @success
+  ensure
+    @success &= @result
+  end
 end

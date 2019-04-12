@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Authentication" do
-  before { @browser.goto 'www.saucedemo.com'}
+require 'spec_helper'
 
-  it "fails" do
+describe 'Authentication' do
+  before { @browser.goto 'www.saucedemo.com' }
+
+  it 'fails' do
     @browser.text_field(data_test: 'username').set 'locked_out_user'
     @browser.text_field(data_test: 'password').set 'secret_sauce'
     @browser.button(type: 'submit').click
