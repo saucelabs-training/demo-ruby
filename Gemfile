@@ -1,8 +1,11 @@
-source "https://www.rubygems.org"
+# frozen_string_literal: true
+
+source 'https://www.rubygems.org'
 
 gem 'cucumber'
-gem 'rspec'
-gem 'selenium-webdriver'
 gem 'parallel_tests'
-gem 'sauce_whisk'
 gem 'rake'
+gem 'rspec'
+gem 'rubocop'
+gem 'sauce_whisk'
+gem 'selenium-webdriver'

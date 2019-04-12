@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 require 'selenium-webdriver'
 require 'rspec'
 require_relative 'sauce_helpers'
-
-include SauceHelpers
 
 Before do |scenario|
   options = platform("#{scenario.feature.name} - #{scenario.name}")
@@ -12,14 +12,13 @@ Before do |scenario|
   url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
   @driver = Selenium::WebDriver.for(:remote, url: url,
-                                    desired_capabilities: capabilities)
+                                             desired_capabilities: capabilities)
 end
 
 After do |scenario|
   SauceWhisk::Jobs.change_status(@driver.session_id, scenario.passed?)
   @driver.quit
 end
-
 
 #
 # Note that having this as a conditional in the test code is less ideal

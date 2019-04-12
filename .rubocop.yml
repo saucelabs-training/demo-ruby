@@ -1,0 +1,12 @@
+AllCops:
+  TargetRubyVersion: 2.4.6
+
+Metrics/MethodLength:
+  Exclude:
+    - 'features/support/env.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
