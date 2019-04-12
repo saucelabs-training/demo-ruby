@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Cart" do
+require 'spec_helper'
+
+describe 'Cart' do
   before { visit 'https://www.saucedemo.com/inventory.html' }
 
-  it "removes one" do
+  it 'removes one' do
     first('.btn_primary').click
     first('.btn_primary').click
     first('.btn_secondary').click

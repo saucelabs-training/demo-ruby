@@ -1,9 +1,11 @@
-source "https://www.rubygems.org"
+# frozen_string_literal: true
 
-gem 'rspec'
-gem 'capybara', ">= 3.16.2"
-gem 'selenium-webdriver'
+source 'https://www.rubygems.org'
+
+gem 'capybara', '>= 3.16.2'
 gem 'parallel_split_test'
 gem 'rake'
+gem 'rspec'
 gem 'rubocop'
 gem 'sauce_whisk'
+gem 'selenium-webdriver'

@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Authentication" do
+require 'spec_helper'
+
+describe 'Authentication' do
   before { visit 'https://www.saucedemo.com' }
 
-  it "fails" do
+  it 'fails' do
     fill_in 'Username', with: 'locked_out_user'
     fill_in 'Password', with: 'secret_sauce'
 

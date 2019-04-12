@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/core/rake_task'
 
 #
@@ -54,7 +56,6 @@ end
 task :default do
   Rake::Task[:mac_sierra_chrome].execute
 end
-
 
 #
 # For Running Sauce Demo

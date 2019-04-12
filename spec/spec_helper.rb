@@ -1,8 +1,10 @@
-require "capybara"
-require "capybara/rspec"
-require "selenium-webdriver"
-require "rspec"
-require "sauce_whisk"
+# frozen_string_literal: true
+
+require 'capybara'
+require 'capybara/rspec'
+require 'selenium-webdriver'
+require 'rspec'
+require 'sauce_whisk'
 
 Capybara.default_max_wait_time = 10
 
@@ -18,9 +20,9 @@ RSpec.configure do |config|
 
       url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
-      Capybara::Selenium::Driver.new(app, {browser: :remote,
-                                                     url: url,
-                                                     desired_capabilities: caps})
+      Capybara::Selenium::Driver.new(app, browser: :remote,
+                                          url: url,
+                                          desired_capabilities: caps)
     end
     Capybara.current_driver = :sauce
   end
@@ -30,7 +32,6 @@ RSpec.configure do |config|
     SauceWhisk::Jobs.change_status(session_id, !example.exception)
     Capybara.current_session.quit
   end
-
 
   #
   # Note that having this as a conditional in the test code is less ideal
@@ -55,7 +56,7 @@ RSpec.configure do |config|
       {platform_name: 'macOS 10.12',
        browser_name: 'chrome',
        "goog:chromeOptions": {w3c: true},
-       browser_version: '65.0'}.merge(sauce_w3c name)
+       browser_version: '65.0'}.merge(sauce_w3c(name))
     when 'mac_mojave_safari'
       {platform_name: 'macOS 10.14',
        browser_name: 'safari',
@@ -86,8 +87,7 @@ RSpec.configure do |config|
      build: build_name,
      username: ENV['SAUCE_USERNAME'],
      access_key: ENV['SAUCE_ACCESS_KEY'],
-     selenium_version: '3.141.59',
-    }
+     selenium_version: '3.141.59'}
   end
 
   #
@@ -96,7 +96,7 @@ RSpec.configure do |config|
   #
   def build_name
     if ENV['TRAVIS_REPO_SLUG']
-      "#{ENV['TRAVIS_REPO_SLUG'][/[^\/]+$/]}: #{ENV['TRAVIS_JOB_NUMBER']}"
+      "#{ENV['TRAVIS_REPO_SLUG'][%r{[^/]+$}]}: #{ENV['TRAVIS_JOB_NUMBER']}"
     elsif ENV['SAUCE_START_TIME']
       ENV['SAUCE_START_TIME']
     else

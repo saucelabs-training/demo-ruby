@@ -1,9 +1,11 @@
-require "spec_helper"
+# frozen_string_literal: true
 
-describe "Cart" do
-  before { visit 'https://www.saucedemo.com/inventory.html'}
+require 'spec_helper'
 
-  it "adds one" do
+describe 'Cart' do
+  before { visit 'https://www.saucedemo.com/inventory.html' }
+
+  it 'adds one' do
     first('.btn_primary').click
 
     expect(page).to have_css('.shopping_cart_badge', exact_text: '1')
@@ -11,7 +13,7 @@ describe "Cart" do
     expect(page).to have_css('.inventory_item_name', count: 1)
   end
 
-  it "adds two" do
+  it 'adds two' do
     first('.btn_primary').click
     first('.btn_primary').click
 
