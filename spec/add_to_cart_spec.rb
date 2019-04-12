@@ -4,7 +4,7 @@ describe "Cart" do
   before { @browser.goto 'www.saucedemo.com/inventory.html'}
 
   it "adds one" do
-    @browser.button(class: 'add-to-cart-button').click
+    @browser.button(class: 'btn_primary').click
 
     expect(@browser.span(class: 'shopping_cart_badge').text).to eq '1'
     @browser.goto "https://www.saucedemo.com/cart.html"
@@ -12,8 +12,8 @@ describe "Cart" do
   end
 
   it "adds two" do
-    @browser.button(class: 'add-to-cart-button').click
-    @browser.button(class: 'add-to-cart-button').click
+    @browser.button(class: 'btn_primary').click
+    @browser.button(class: 'btn_primary').click
 
     expect(@browser.span(class: 'shopping_cart_badge').text).to eq '2'
     @browser.goto "https://www.saucedemo.com/cart.html"
