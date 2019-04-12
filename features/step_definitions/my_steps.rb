@@ -3,7 +3,7 @@ Given(/^I am on the Product Page$/) do
 end
 
 When(/^I add (.*) items$/) do |number|
-  number.to_i.times { @driver.find_element(class: 'add-to-cart-button').click }
+  number.to_i.times { @driver.find_element(class: 'btn_primary').click }
 end
 
 Then(/^I should see (.*) items? in the cart$/) do |number|
@@ -37,9 +37,9 @@ Then(/^I should see an error$/) do
 end
 
 And(/^I have (\d+) items in the Cart$/) do |number|
-  number.to_i.times { @driver.find_element(class: 'add-to-cart-button').click }
+  number.to_i.times { @driver.find_element(class: 'btn_primary').click }
 end
 
 When(/^I remove (\d+) item$/) do |number|
-  number.times { @driver.find_element(class: 'remove-from-cart-button').click }
+  number.times { @driver.find_element(class: 'btn_secondary').click }
 end
