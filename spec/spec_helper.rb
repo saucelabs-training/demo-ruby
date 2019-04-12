@@ -4,10 +4,10 @@ require 'selenium-webdriver'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.before(:each) do |test|
-    options = platform(test.full_description)
+  config.before(:each) do |example|
+    options = platform(example.full_description)
 
-    browser = options.delete(:browser_name)
+    browser = options.delete(:browser_name).to_sym
     capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
     url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
