@@ -3,7 +3,7 @@ Given(/^I am on the Product Page$/) do
 end
 
 When(/^I add (.*) items$/) do |number|
-  number.to_i.times { first('.add-to-cart-button').click }
+  number.to_i.times { first('.btn_primary').click }
 end
 
 Then(/^I should see (.*) items? in the cart$/) do |number|
@@ -34,9 +34,9 @@ Then(/^I should see an error$/) do
 end
 
 And(/^I have (\d+) items in the Cart$/) do |number|
-  number.to_i.times { first('.add-to-cart-button').click }
+  number.to_i.times { first('.btn_primary').click }
 end
 
 When(/^I remove (\d+) item$/) do |number|
-  number.to_i.times { first('.remove-from-cart-button').click }
+  number.to_i.times { first('.btn_secondary').click }
 end
