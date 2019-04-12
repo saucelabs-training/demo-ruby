@@ -17,7 +17,7 @@ describe 'Cart' do
     @driver.find_element(class: 'btn_secondary').click
     expect(@driver.find_element(class: 'shopping_cart_badge').text).to eq '1'
 
-    @driver.get 'http://www.saucedemo.com/cart.html'
+    @driver.get 'https://www.saucedemo.com/cart.html'
     expect(@driver.find_elements(class: 'inventory_item_name').size).to eq 1
   end
 end

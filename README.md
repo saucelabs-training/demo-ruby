@@ -48,4 +48,4 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 
 ### Watch Your Tests Run
 
-[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard/)
+[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard)
