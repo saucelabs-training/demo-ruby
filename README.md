@@ -24,7 +24,7 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     * In the terminal export your Sauce Labs Credentials as environmental variables:
     ```
     $ export SAUCE_USERNAME=<your Sauce Labs username>
-	$ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
+    $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
     ```
 
 3. Project Dependencies
@@ -35,28 +35,19 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 
 ### Running Tests
 
-* Tests in Parallel:
+* Run tests in parallel on default configuration:
 	```
-	$ rake test_sauce
+	$ bundle exec rake
+	```
+* Run in parallel on a specified configuration (see `/spec/Rakefile` for the available tasks)
+	```
+	$ bundle exec rake windows_10_edge
+	```
+* Sauce Labs Demo execution:
+	```
+	$ bundle exec rake sauce_demo
 	```
 
-[Sauce Labs Dashboard](https://saucelabs.com/beta/dashboard/)
+### Watch Your Tests Run
 
-### Advice/Troubleshooting
-
-1. There may be additional latency when using a remote webdriver to run tests on Sauce Labs. Timeouts or Waits may need to be increased.
-    * [Selenium tips regarding explicit waits](https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Explicit+Waits)
-
-### Resources
-##### [Sauce Labs Documentation](https://wiki.saucelabs.com/)
-
-##### [SeleniumHQ Documentation](http://www.seleniumhq.org/docs/)
-
-##### [Cucumber Documentation](https://cucumber.io/docs/reference)
-
-##### [Capybara Documentation](http://www.rubydoc.info/github/jnicklas/capybara/master)
-
-##### [Ruby Documentation](http://ruby-doc.org/)
-
-##### [Stack Overflow](http://stackoverflow.com/)
-* A great resource to search for issues not explicitly covered by documentation.
+[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard)
