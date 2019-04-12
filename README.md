@@ -21,8 +21,8 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     * Add the following Sauce Labs Credentials as environmental variables
     (specific details will vary depending on Operating System).
     ```
-    SAUCE_USERNAME=<your Sauce Labs username>
-	SAUCE_ACCESS_KEY=<your Sauce Labs access key>
+    $ SAUCE_USERNAME=<your Sauce Labs username>
+    $ SAUCE_ACCESS_KEY=<your Sauce Labs access key>
     ```
 
 3. Project Dependencies
