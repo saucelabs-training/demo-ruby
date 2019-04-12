@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/core/rake_task'
 
 #
@@ -55,7 +57,6 @@ task :default do
   Rake::Task[:mac_sierra_chrome].execute
 end
 
-
 #
 # For Running Sauce Demo
 # This runs multiple platforms at the same time, which isn't considered best practice,
@@ -70,17 +71,17 @@ PLATFORMS.each do |platform|
   task "#{platform}_demo" do
     ENV['PLATFORM'] = platform
     begin
-      @result = system "parallel_cucumber features/ -n 10 --group-by scenarios"
+      @result = system 'parallel_cucumber features/ -n 10 --group-by scenarios'
     ensure
       @success &= @result
     end
   end
 end
 
-desc "Run multiple platforms simultaneously"
+desc 'Run multiple platforms simultaneously'
 multitask sauce_demo: PLATFORMS.map { |p| "#{p}_demo" } do
   begin
-    raise StandardError, "Tests failed!" unless @success
+    raise StandardError, 'Tests failed!' unless @success
   ensure
     @success &= @result
   end

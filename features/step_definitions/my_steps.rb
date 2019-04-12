@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^I am on the Product Page$/) do
   visit 'http://www.saucedemo.com/inventory.html'
 end
