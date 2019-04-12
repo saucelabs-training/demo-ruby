@@ -27,7 +27,6 @@ RSpec.configure do |config|
 
   config.after(:each) do |example|
     session_id = Capybara.current_session.driver.browser.session_id
-    puts "Driver Session ID: #{session_id}"
     SauceWhisk::Jobs.change_status(session_id, !example.exception)
     Capybara.current_session.quit
   end

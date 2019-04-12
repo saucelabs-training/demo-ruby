@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Cart" do
-  before { visit 'http://www.saucedemo.com/inventory.html'}
+  before { visit 'https://www.saucedemo.com/inventory.html'}
 
   it "adds one" do
     first('.btn_primary').click

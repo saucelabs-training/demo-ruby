@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "Authentication" do
-  before { visit 'http://www.saucedemo.com' }
+  before { visit 'https://www.saucedemo.com' }
 
   it "successful" do
     fill_in 'Username', with: 'standard_user'
