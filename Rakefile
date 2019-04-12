@@ -8,8 +8,10 @@ ENV['SAUCE_START_TIME'] = "Ruby-RSpec-Capybara: Local-#{Time.now.to_i}"
 #
 # Uses parallel-split-test gem to set the number of tests that get run in parallel
 # parallel_split_test gem splits up tests within files
+# Typically this gets set up to the limit of your Sauce Labs Sessions,
+# or a subset as required to run multiple builds on Sauce Labs simultaneously
 #
-ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '2'
+ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '10'
 
 #
 # Ideally run one of these Rake Tasks in your CI rather than
