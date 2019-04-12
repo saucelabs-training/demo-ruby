@@ -6,9 +6,10 @@ require 'sauce_whisk'
 
 Before do |scenario|
   Capybara.register_driver :sauce do |app|
-    opt = platform("#{scenario.feature.name} - #{scenario.name}")
+    options = platform("#{scenario.feature.name} - #{scenario.name}")
 
-    caps = Selenium::WebDriver::Remote::Capabilities.send(opt.delete(:browser_name).to_sym, opt)
+    browser = options.delete(:browser_name).to_sym
+    caps = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
 
     url = 'https://ondemand.saucelabs.com:443/wd/hub'
 
