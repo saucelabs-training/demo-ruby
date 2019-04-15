@@ -2,7 +2,6 @@
 
 require 'selenium-webdriver'
 require 'rspec'
-require_relative 'sauce_helpers'
 
 Before do |scenario|
   options = platform("#{scenario.feature.name} - #{scenario.name}")
