@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'watir'
 require 'rspec'
 require 'sauce_whisk'
 
 Before do |scenario|
   options = platform("#{scenario.feature.name} - #{scenario.name}")
-  options[:url] = "https://ondemand.saucelabs.com:443/wd/hub"
+  options[:url] = 'https://ondemand.saucelabs.com:443/wd/hub'
   browser = options.delete(:browser_name).to_sym
 
   @browser = Watir::Browser.new browser, options

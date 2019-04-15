@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Given(/^I am on the Product Page$/) do
   @browser.goto 'www.saucedemo.com/inventory.html'
 end
@@ -8,7 +10,7 @@ end
 
 Then(/^I should see (.*) items? in the cart$/) do |number|
   expect(@browser.span(class: 'shopping_cart_badge').text).to eq number
-  @browser.goto "https://www.saucedemo.com/cart.html"
+  @browser.goto 'https://www.saucedemo.com/cart.html'
   expect(@browser.divs(class: 'inventory_item_name').size).to eq number.to_i
 end
 
