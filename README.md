@@ -21,7 +21,7 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     * In the terminal export your Sauce Labs Credentials as environmental variables:
     ```
     $ export SAUCE_USERNAME=<your Sauce Labs username>
-	$ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
+    $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
     ```
 
 3. Project Dependencies
@@ -32,19 +32,19 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 
 ### Running Tests
 
-* Tests in Parallel:
+* Run tests in parallel on default configuration:
 	```
-	$ rake parallel_run
+	$ bundle exec rake
 	```
-* Specific Configuration (see `/spec/support/platforms.yml` file)
+* Run in parallel on a specified configuration (see `/spec/Rakefile` for the available tasks)
 	```
-	$ rake mac_sierra_chrome
+	$ bundle exec rake windows_10_edge
 	```
-* Demo Mode
+* Sauce Labs Demo execution:
 	```
-	$ rake sauce_demo
+	$ bundle exec rake sauce_demo
 	```
 
 ### Watch Your Tests Run
 
-[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard/)
+[Sauce Labs Dashboard](https://app.saucelabs.com/dashboard)
