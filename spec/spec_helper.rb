@@ -12,9 +12,9 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Capybara::RSpecMatchers
 
-  config.before(:each) do |example|
+  config.before(:each) do |test|
     Capybara.register_driver :sauce do |app|
-      opt = platform(example.description)
+      opt = platform(test.full_description)
 
       caps = Selenium::WebDriver::Remote::Capabilities.send(opt.delete(:browser_name).to_sym, opt)
 
@@ -27,9 +27,9 @@ RSpec.configure do |config|
     Capybara.current_driver = :sauce
   end
 
-  config.after(:each) do |example|
+  config.after(:each) do |test|
     session_id = Capybara.current_session.driver.browser.session_id
-    SauceWhisk::Jobs.change_status(session_id, !example.exception)
+    SauceWhisk::Jobs.change_status(session_id, !test.exception)
     Capybara.current_session.quit
   end
 
@@ -47,10 +47,9 @@ RSpec.configure do |config|
        browser_name: 'edge',
        browser_version: '18.17763'}.merge(sauce_w3c(name))
     when 'windows_8_ie'
-      # Note: w3c is not working for Windows 8 & IE 11
       {platform: 'Windows 8.1',
        browser_name: 'ie',
-       version: '11.0'}.merge(sauce_oss(name))
+       version: '11.0'}.merge(sauce_w3c(name))
     when 'mac_sierra_chrome'
       # This is for running Chrome with w3c which is not yet the default
       {platform_name: 'macOS 10.12',
@@ -79,6 +78,7 @@ RSpec.configure do |config|
                          build: build_name,
                          username: ENV['SAUCE_USERNAME'],
                          access_key: ENV['SAUCE_ACCESS_KEY'],
+                         iedriver_version: '3.141.59',
                          selenium_version: '3.141.59'}}
   end
 
