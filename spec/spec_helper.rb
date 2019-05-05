@@ -37,7 +37,7 @@ RSpec.configure do |config|
       # Note: w3c is not working for Windows 8 & IE 11
       {platform: 'Windows 8.1',
        browser_name: 'ie',
-       version: '11.0'}.merge(sauce_oss(name))
+       version: '11.0'}.merge(sauce_w3c(name))
     when 'mac_sierra_chrome'
       # This is for running Chrome with w3c which is not yet the default
       {platform_name: 'macOS 10.12',
@@ -66,7 +66,8 @@ RSpec.configure do |config|
                          build: build_name,
                          username: ENV['SAUCE_USERNAME'],
                          access_key: ENV['SAUCE_ACCESS_KEY'],
-                         selenium_version: '3.141.59'}}
+                         selenium_version: '3.141.59',
+                         iedriver_version: '3.141.59'}}
   end
 
   def sauce_oss(name)
