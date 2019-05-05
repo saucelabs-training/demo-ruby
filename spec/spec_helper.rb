@@ -34,7 +34,6 @@ RSpec.configure do |config|
        browser_name: 'edge',
        browser_version: '18.17763'}.merge(sauce_w3c(name))
     when 'windows_8_ie'
-      # Note: w3c is not working for Windows 8 & IE 11
       {platform: 'Windows 8.1',
        browser_name: 'ie',
        version: '11.0'}.merge(sauce_w3c(name))
