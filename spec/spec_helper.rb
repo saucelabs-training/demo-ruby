@@ -4,7 +4,7 @@ require 'selenium-webdriver'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.before(:each) do |example|
+  config.before do |example|
     options = platform(example.full_description)
 
     browser = options.delete(:browser_name).to_sym
@@ -15,7 +15,7 @@ RSpec.configure do |config|
                                                desired_capabilities: capabilities)
   end
 
-  config.after(:each) do |example|
+  config.after do |example|
     SauceWhisk::Jobs.change_status(@driver.session_id, !example.exception)
     @driver.quit
   end
