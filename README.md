@@ -10,7 +10,7 @@ The code in these scripts is provided on an "AS-IS” basis without warranty of 
 
 ## Description
 
-These procedures will show you to set up a Selenium environment for NodeJS. The scripts in this repository allow you run a simple automated test to validate your Selenium environment and your [saucelabs.com](https://app.saucelabs.com/login) account credentials.
+These procedures will show you to set up a Selenium environment for Ruby. The scripts in this repository allow you run a simple automated test to validate your Selenium environment and your [saucelabs.com](https://app.saucelabs.com/login) account credentials.
 
 <br />
 
