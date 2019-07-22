@@ -6,7 +6,6 @@ require 'sauce_whisk'
 RSpec.configure do |config|
   config.before(:each) do |example|
     options = platform(example.full_description)
-    options[:url] = 'https://ondemand.saucelabs.com:443/wd/hub'
 
     browser = options.delete(:browser_name)
 
@@ -27,53 +26,40 @@ RSpec.configure do |config|
   # This will change soon. Where possible prefer the w3c approach
   #
   def platform(name)
+    ENV['PLATFORM'] ||= 'mac_sierra_chrome'
+    SauceWhisk.data_center = :US_WEST
+
     case ENV['PLATFORM']
     when 'windows_10_edge'
-      {platform_name: 'Windows 10',
-       browser_name: 'edge',
-       browser_version: '18.17763'}.merge(sauce_w3c(name))
+      common_params(name).merge(platform_name: 'Windows 10',
+                                browser_name: 'edge')
     when 'windows_8_ie'
-      {platform: 'Windows 8.1',
-       browser_name: 'ie',
-       version: '11.0'}.merge(sauce_w3c(name))
+      common_params(name).merge(platform: 'Windows 8.1',
+                                browser_name: 'ie')
     when 'mac_sierra_chrome'
-      # This is for running Chrome with w3c which is not yet the default
-      {platform_name: 'macOS 10.12',
-       browser_name: 'chrome',
-       "goog:chromeOptions": {w3c: true},
-       browser_version: '65.0'}.merge(sauce_w3c(name))
+      common_params(name).merge(platform_name: 'macOS 10.12',
+                                browser_name: 'chrome')
     when 'mac_mojave_safari'
-      {platform_name: 'macOS 10.14',
-       browser_name: 'safari',
-       browser_version: '12.0'}.merge(sauce_w3c(name))
+      common_params(name).merge(platform_name: 'macOS 10.14',
+                                browser_name: 'safari')
     when 'windows_7_ff'
-      {platform_name: 'Windows 7',
-       browser_name: 'firefox',
-       browser_version: '60.0'}.merge(sauce_w3c(name))
-    else
-      # Always specify a default;
-      # this doesn't force Chrome to w3c
-      {platform: 'macOS 10.12',
-       browser_name: 'chrome',
-       version: '65.0'}.merge(sauce_oss(name))
+      common_params(name).merge(platform_name: 'Windows 7',
+                                browser_name: 'firefox')
+    when 'headless'
+      SauceWhisk.data_center = :US_EAST
+      common_params(name).merge(platform_name: 'Linux',
+                                browser_name: 'chrome',
+                                url: 'https://ondemand.us-east-1.saucelabs.com:443/wd/hub')
     end
   end
 
-  def sauce_w3c(name)
-    {'sauce:options' => {name: name,
+  def common_params(name)
+    {url: 'https://ondemand.saucelabs.com:443/wd/hub',
+     browser_version: 'latest',
+     'sauce:options' => {name: name,
                          build: build_name,
                          username: ENV['SAUCE_USERNAME'],
-                         access_key: ENV['SAUCE_ACCESS_KEY'],
-                         iedriver_version: '3.141.59',
-                         selenium_version: '3.141.59'}}
-  end
-
-  def sauce_oss(name)
-    {name: name,
-     build: build_name,
-     username: ENV['SAUCE_USERNAME'],
-     access_key: ENV['SAUCE_ACCESS_KEY'],
-     selenium_version: '3.141.59'}
+                         access_key: ENV['SAUCE_ACCESS_KEY']}}
   end
 
   #

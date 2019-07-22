@@ -47,6 +47,12 @@ task :mac_mojave_safari do
   system 'parallel_split_test spec'
 end
 
+desc 'Run tests in parallel within suite using Mac Mojave with Safari'
+task :headless do
+  ENV['PLATFORM'] = 'headless'
+  system 'parallel_split_test spec'
+end
+
 #
 # Always set a Default Task
 #

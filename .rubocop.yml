@@ -9,6 +9,14 @@ Metrics/MethodLength:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
 Metrics/LineLength:
   Max: 120
 
