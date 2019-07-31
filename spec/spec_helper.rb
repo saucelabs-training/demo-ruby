@@ -5,76 +5,67 @@ require 'sauce_whisk'
 
 RSpec.configure do |config|
   config.before do |example|
-    options = platform(example.full_description)
+    create_session(example.full_description)
+  end
+
+  config.after do |example|
+    end_session(!example.exception)
+  end
+
+  def create_session(test_name)
+    # Sauce has multiple data centers, need to specify;
+    # Options are :US_WEST :EU_VDC and :US_EAST (for headless)
+    SauceWhisk.data_center = ENV['SAUCE_DC']&.to_sym || :US_WEST
+
+    # Ideal implementation is to set 'PLATFORM' environment variable in a Rake task, but we always include a defualt
+    options = platform(ENV['PLATFORM'] || 'mac_sierra_chrome')
+
+    options['sauce:options'] = {name: test_name,
+                                build: build_name,
+                                username: ENV['SAUCE_USERNAME'],
+                                access_key: ENV['SAUCE_ACCESS_KEY']}
+
+    # Make sure URL and Data Center value above match
+    url = ENV['SAUCE_URL'] || 'https://ondemand.saucelabs.com:443/wd/hub'
 
     browser = options.delete(:browser_name).to_sym
     capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
-    url = 'https://ondemand.saucelabs.com:443/wd/hub'
-
     @driver = Selenium::WebDriver.for(:remote, url: url,
                                                desired_capabilities: capabilities)
   end
 
-  config.after do |example|
-    SauceWhisk::Jobs.change_status(@driver.session_id, !example.exception)
+  def end_session(result)
+    SauceWhisk::Jobs.change_status(@driver.session_id, result)
     @driver.quit
   end
 
-  #
-  # Note that having this as a conditional in the test code is less ideal
-  # It is better for static data to be pulled from a serialized file like a yaml
-  #
-  # Note: not all browsers are defaulting to using w3c protocol
-  # This will change soon. Where possible prefer the w3c approach
-  #
-  def platform(name)
-    case ENV['PLATFORM']
+  # Ideal implementation is to do a lookup from a YAML file or the like rather than using a switch implementation
+  def platform(platform_key)
+    case platform_key
     when 'windows_10_edge'
       {platform_name: 'Windows 10',
        browser_name: 'edge',
-       browser_version: '18.17763'}.merge(sauce_w3c(name))
+       browser_version: '18.17763'}
     when 'windows_8_ie'
       {platform: 'Windows 8.1',
        browser_name: 'ie',
-       version: '11.0'}.merge(sauce_w3c(name))
+       version: '11.0'}
     when 'mac_sierra_chrome'
-      # This is for running Chrome with w3c which is not yet the default
       {platform_name: 'macOS 10.12',
        browser_name: 'chrome',
-       "goog:chromeOptions": {w3c: true},
-       browser_version: '65.0'}.merge(sauce_w3c(name))
+       browser_version: '75.0'}
     when 'mac_mojave_safari'
       {platform_name: 'macOS 10.14',
        browser_name: 'safari',
-       browser_version: '12.0'}.merge(sauce_w3c(name))
+       browser_version: '12.0'}
     when 'windows_7_ff'
       {platform_name: 'Windows 7',
        browser_name: 'firefox',
-       browser_version: '60.0'}.merge(sauce_w3c(name))
-    else
-      # Always specify a default;
-      # this doesn't force Chrome to w3c
-      {platform: 'macOS 10.12',
-       browser_name: 'chrome',
-       version: '65.0'}.merge(sauce_oss(name))
+       browser_version: '60.0'}
+    when 'headless'
+      {platform_name: 'Linux',
+       browser_name: 'chrome'}
     end
-  end
-
-  def sauce_w3c(name)
-    {'sauce:options' => {name: name,
-                         build: build_name,
-                         username: ENV['SAUCE_USERNAME'],
-                         access_key: ENV['SAUCE_ACCESS_KEY'],
-                         selenium_version: '3.141.59',
-                         iedriver_version: '3.141.59'}}
-  end
-
-  def sauce_oss(name)
-    {name: name,
-     build: build_name,
-     username: ENV['SAUCE_USERNAME'],
-     access_key: ENV['SAUCE_ACCESS_KEY'],
-     selenium_version: '3.141.59'}
   end
 
   #

@@ -47,6 +47,14 @@ task :mac_mojave_safari do
   system 'parallel_split_test spec'
 end
 
+desc 'Run tests on Headless Sauce'
+task :headless do
+  ENV['PLATFORM'] = 'headless'
+  ENV['SAUCE_URL'] = 'https://ondemand.us-east-1.saucelabs.com:443/wd/hub'
+  ENV['SAUCE_DC'] = 'US_EAST'
+  system 'parallel_split_test spec'
+end
+
 #
 # Always set a Default Task
 #
