@@ -1,0 +1,4 @@
+tasks:
+  - before: chmod +x setup.sh
+    init: ./setup.sh
+    command: rbenv -v

@@ -7,8 +7,7 @@ describe "Instant_RSpec_Test4" do
     caps = {
         browser_name: 'chrome',
         platform_name: 'windows 10',
-        browser_version: '71.0',
-        "goog:chromeOptions" => {w3c: true},
+        browser_version: 'latest',
         "sauce:options" => {
             build: 'Onboarding Sample App - Ruby',
             name: '4-best-practices',

@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/ruby:2.6.3  # primary container for the build job
+    steps:
+      - checkout
+      - run:
+          name: "Install dependencies"
+          command: |
+            sudo apt-get update
+            sudo apt-get install autoconf bison build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+      - run:
+          name: "Install .rbenv"
+          command: |
+            git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+            echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+            source ~/.bashrc
+      - run:
+          name: "Install ruby-build"
+          command: |
+            git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+            rbenv install -l
+            echo "gem: --no-document" > ~/.gemrc
+      - run:
+          name: "Install Bundler"
+          command: |
+            gem install bundler
+            bundle install --path .bundle
+      - run:
+          name: "Install Sauce Connect Client"
+          command: |
+            sudo apt-get install lsof
+            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+            tar -xzf saucelabs.tar.gz
+      - run:
+          name: "Launch Tunnel"
+          background: true
+          command: |
+            cd sc-*
+            bin/sc --pidfile /tmp/sc.pid1 -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -i demo-python-tunnel --no-remove-colliding-tunnels --se-port 4445
+      - run:
+          name: "Run RSPEC Tests"
+          command: |
+            while ! lsof -i:4445 -t; do sleep 3; done
+            bundle exec rspec
+      - run:
+          name: "Shut Down Sauce Connect Tunnel"
+          command: |
+            kill -9 `cat /tmp/sc.pid1`

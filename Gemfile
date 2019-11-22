@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 
+gem 'parallel_split_test'
+gem 'rake'
 gem 'rspec'
-gem 'selenium-webdriver'
-gem 'sauce_whisk'
 gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
+gem 'sauce_whisk'
+gem 'selenium-webdriver'
