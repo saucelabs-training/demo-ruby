@@ -12,4 +12,3 @@ echo "gem: --no-document" > ~/.gemrc
 gem install bundler
 gem install rails
 bundle install --path .bundle
-bundle exec rspec

@@ -18,9 +18,7 @@ describe "Instant_RSpec_Test3" do
         # platform_version now becomes platform_name with the W3C bridge.
         # For more details see: https://www.rubydoc.info/gems/selenium-webdriver/Selenium/WebDriver/Remote/W3C/Capabilities
         platform_name: 'windows 10',
-        browser_version: '71.0',
-        # w3c is note enabled by default in Chrome, set the w3c setting to true
-        "goog:chromeOptions" => {w3c: true},
+        browser_version: 'latest',
         # use sauce:options to handle all saucelabs.com-specific capabilities such as:
         # username, accesskey, build number, test name, timeouts etc.
         "sauce:options" => {
