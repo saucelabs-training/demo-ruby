@@ -1,0 +1,4 @@
+tasks:
+  - before: setup.sh
+    init: gem install bundler
+    command: bundle install --path .bundle
