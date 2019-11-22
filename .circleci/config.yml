@@ -14,19 +14,15 @@ jobs:
           name: "Install .rbenv"
           command: |
             git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
-            echo 'eval "$(rbenv init -)"' >> ~/.bashrc
-            source ~/.bashrc
-      - run:
-          name: "Install ruby-build"
-          command: |
-            git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
-            rbenv install -l
-      - run:
-          name: "Install Bundler"
-          command: |
-            gem install bundler
-            bundle install --path .bundle
+	    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+	    echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+	    source ~/.bashrc
+	    git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+	    rbenv install -l
+	    echo "gem: --no-document" > ~/.gemrc
+	    gem install bundler
+	    gem install rails
+	    bundle install --path .bundle
       - run:
           name: "Install Sauce Connect Client"
           command: |
