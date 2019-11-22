@@ -15,7 +15,7 @@ In order to complete these exercises you must complete the following prerequisit
 
 * Install [Git](https://github.com/saucelabs-training/demo-ruby/blob/master/docs/prerequisites.md#install-git)
 * Install [Ruby](https://github.com/saucelabs-training/demo-ruby/blob/master/docs/prerequisites.md#install-ruby)
-* Install an [IDE (RubyMine, RadRails etc.)](https://github.com/saucelabs-training/demo-ruby/blob/master/docs/prerequisites.md#install-an-ide)
+* Install an [IDE](https://github.com/saucelabs-training/demo-ruby/blob/master/docs/prerequisites.md#install-an-ide)
 * [Setup the Project](#setup-the-project)
 
 > Select the button below to try this demo in [Gitpod](https://www.gitpod.io/)
