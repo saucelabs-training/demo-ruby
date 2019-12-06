@@ -13,6 +13,7 @@ jobs:
       - run:
           name: "Install rbenv and bundler"
           command: |
+            cd on-boarding-modules
             chmod +x setup.sh
             ./setup.sh
       - run:
@@ -31,6 +32,7 @@ jobs:
           name: "Run RSPEC Tests"
           command: |
             while ! lsof -i:4445 -t; do sleep 3; done
+            cd on-boarding-modules
             bundle exec rspec
       - run:
           name: "Shut Down Sauce Connect Tunnel"

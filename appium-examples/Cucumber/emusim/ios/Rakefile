@@ -1,0 +1,29 @@
+def run_tests(deviceName, platformName, platformVersion, app, junit)
+  system("deviceName=\"#{deviceName}\" platformName=\"#{platformName}\" platformVersion=\"#{platformVersion}\" app=\"#{app}\" parallel_split_test spec")
+end
+
+task :iPhone_6_Simulator do
+  run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://s3.amazonaws.com/appium/TestApp8.4.app.zip', 'junit_reports/iPhone_6_Simulator')
+end
+
+task :iPhone_11_Pro_Simulator do
+  run_tests('iPhone 11 Pro Simulator', 'iOS', '13.0', 'https://s3.amazonaws.com/appium/TestApp8.4.app.zip', 'junit_reports/iPhone_11_Pro_Simulator')
+end
+
+task :iPad_Air_Simulator do
+  run_tests('iPad Air Simulator', 'iOS', '11.2', 'https://s3.amazonaws.com/appium/TestApp8.4.app.zip', 'junit_reports/iPad_Air_Simulator')
+end
+
+task :iPad_Simulator do
+  run_tests('iPad (6th generation) Simulator', 'iOS', '12.0', 'https://s3.amazonaws.com/appium/TestApp8.4.app.zip', 'junit_reports/iPad_Simulator')
+end
+
+multitask :test_sauce => [
+    :iPhone_6_Simulator,
+    :iPhone_11_Pro_Simulator,
+    :iPad_Air_Simulator,
+    :iPad_Simulator,
+
+] do
+  puts 'Running automation'
+end

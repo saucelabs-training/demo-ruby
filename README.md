@@ -6,10 +6,12 @@ The demo scripts in [this repository](https://github.com/saucelabs-training/demo
 
 > ###### Disclaimer:
 > The code in these scripts is provided on an "AS-IS" basis without warranty of any kind, either express or implied, including without limitation any implied warranties of condition, uninterrupted use, merchantability, fitness for a particular purpose, or non-infringement. These scripts are provided for educational and demonstration purposes only, and should not be used in production. Issues regarding these scripts should be submitted through GitHub. These scripts are maintained by the Technical Services team at Sauce Labs.
+>
+> Some examples in this repository, such as `appium-examples` and `headless-examples`, may require a different account tier beyond free trial. Please contact the [Sauce Labs Sales Team](https://saucelabs.com/contact) for support and information.
 
 <br />
 
-## Prerequisites
+## General Prerequisites
 
 In order to complete these exercises you must complete the following prerequisite installation and configuration steps:
 
