@@ -26,13 +26,13 @@ RSpec.configure do | config |
             name: example.full_description,
             appiumVersion: '1.9.1',
             browserName: '',
-            build: 'Appium RSpec Examples'
+            build: 'Appium-Ruby-RSpec EmuSim Examples'
         }
     }
 
     #caps.merge!({deviceType: "ENV['deviceType']"}) if ENV['deviceType'] != ''
 
-    @driver = Appium::Driver.new(caps)
+    @driver = Appium::Driver.new(caps, true)
     @driver.start_driver
 
   end

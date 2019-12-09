@@ -18,11 +18,31 @@ task :Galaxy_S6_Emulator do
   run_tests('Samsung Galaxy S6 GoogleAPI Emulator', 'Android', '7.0', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
 end
 
+task :iPhone_6_Simulator do
+  run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+end
+
+task :iPhone_7_Simulator do
+  run_tests('iPhone 7 Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+end
+
+task :iPad_Air_Simulator do
+  run_tests('iPad Air Simulator', 'iOS', '11.2', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+end
+
+task :iPad_Simulator do
+  run_tests('iPad (6th generation) Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+end
+
 multitask :test_sauce => [
     :Andoid_Emulator_Phone_5_1,
     :Galaxy_S8_Emulator,
     :Andoid_Emulator_Tablet_5_1,
     :Galaxy_S6_Emulator,
+    :iPhone_6_Simulator,
+    :iPhone_7_Simulator,
+    :iPad_Air_Simulator,
+    :iPad_Simulator,
 
 ] do
   puts 'Running automation'

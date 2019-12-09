@@ -14,7 +14,7 @@ Before do | scenario |
           name: "#{scenario.feature.name} - #{scenario.name}",
           appiumVersion: '1.9.1',
           browserName: '',
-          build: 'Appium-Ruby-Cucumber Examples'
+          build: 'Appium-Ruby-Cucumber EmuSim Examples'
       }
   }
 

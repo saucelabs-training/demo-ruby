@@ -11,11 +11,25 @@ jobs:
           command: |
             sudo apt-get update
       - run:
-          name: "Install rbenv and bundler"
+          name: "Install On-Boarding RSpec Dependencies"
           command: |
             cd on-boarding-modules
             chmod +x setup.sh
             ./setup.sh
+      - run:
+          name: "Install Appium-RSpec Dependencies"
+          command: |
+            cd appium-examples/RSpec/emusim
+            gem install rake
+            gem install bundler
+            bundle install
+      - run:
+          name: "Install Appium-Cucumber Dependencies"
+          command: |
+            cd appium-examples/Cucumber/emusim
+            gem install rake
+            gem install bundler
+            bundle install
       - run:
           name: "Install Sauce Connect Client"
           command: |
@@ -29,42 +43,20 @@ jobs:
             cd sc-*
             bin/sc --pidfile /tmp/sc.pid1 -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -i demo-python-tunnel --no-remove-colliding-tunnels --se-port 4445
       - run:
-          name: "Run RSPEC Tests"
+          name: "Run RSPEC Desktop Tests"
           command: |
             while ! lsof -i:4445 -t; do sleep 3; done
             cd on-boarding-modules
             bundle exec rspec
       - run:
-          name: "Run Emusim Appium-RSpec-Android Tests"
+          name: "Run Appium-RSpec EmuSim Examples"
           command: |
-            cd appium-examples/RSpec/emusim/android
-            gem install rake
-            gem install bundler
-            bundle install
+            cd appium-examples/RSpec/emusim
             rake test_sauce
       - run:
-          name: "Run Emusim Appium-RSpec-iOS Tests"
+          name: "Run Appium-Cucumber EmuSim Examples"
           command: |
-            cd appium-examples/RSpec/emusim/ios
-            gem install rake
-            gem install bundler
-            bundle install
-            rake test_sauce
-      - run:
-          name: "Run Emusim Appium-Cucumber-Android Tests"
-          command: |
-            cd appium-examples/Cucumber/emusim/android
-            gem install rake
-            gem install bundler
-            bundle install
-            rake test_sauce
-      - run:
-          name: "Run Emusim Appium-Cucumber-iOS Tests"
-          command: |
-            cd appium-examples/Cucumber/emusim/ios
-            gem install rake
-            gem install bundler
-            bundle install
+            cd appium-examples/Cucumber/emusim
             rake test_sauce
       - run:
           name: "Shut Down Sauce Connect Tunnel"

@@ -1,4 +1,4 @@
-require_relative "../spec/spec_helper"
+require_relative "../spec/pec/spec_helper"
 
 class GuineaPigAppPage
   attr_accessor :driver
