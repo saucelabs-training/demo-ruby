@@ -35,6 +35,38 @@ jobs:
             cd on-boarding-modules
             bundle exec rspec
       - run:
+          name: "Run Emusim Appium-RSpec-Android Tests"
+          command: |
+            cd appium-examples/RSpec/emusim/android
+            gem install rake
+            gem install bundler
+            bundle install
+            rake test_sauce
+      - run:
+          name: "Run Emusim Appium-RSpec-iOS Tests"
+          command: |
+            cd appium-examples/RSpec/emusim/ios
+            gem install rake
+            gem install bundler
+            bundle install
+            rake test_sauce
+      - run:
+          name: "Run Emusim Appium-Cucumber-Android Tests"
+          command: |
+            cd appium-examples/Cucumber/emusim/android
+            gem install rake
+            gem install bundler
+            bundle install
+            rake test_sauce
+      - run:
+          name: "Run Emusim Appium-Cucumber-iOS Tests"
+          command: |
+            cd appium-examples/Cucumber/emusim/ios
+            gem install rake
+            gem install bundler
+            bundle install
+            rake test_sauce
+      - run:
           name: "Shut Down Sauce Connect Tunnel"
           command: |
             kill -9 `cat /tmp/sc.pid1`
