@@ -18,7 +18,7 @@ Before do | scenario |
       }
   }
 
-  @driver = Appium::Driver.new(caps)
+  @driver = Appium::Driver.new(caps, true)
   @driver.start_driver
 end
 

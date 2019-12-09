@@ -6,8 +6,8 @@ task :iPhone_6_Simulator do
   run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true', 'junit_reports/iPhone_6_Simulator')
 end
 
-task :iPhone_5s_Simulator do
-  run_tests('iPhone 5s Simulator', 'iOS', '11.1', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true', 'junit_reports/iPhone_5s_Simulator')
+task :iPhone_7_Simulator do
+  run_tests('iPhone 7 Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true', 'junit_reports/iPhone_5s_Simulator')
 end
 
 task :iPad_Air_Simulator do
@@ -20,7 +20,7 @@ end
 
 multitask :test_sauce => [
     :iPhone_6_Simulator,
-    :iPhone_5s_Simulator,
+    :iPhone_7_Simulator,
     :iPad_Air_Simulator,
     :iPad_Simulator,
 

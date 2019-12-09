@@ -1,4 +1,3 @@
-
 require 'appium_lib'
 require 'sauce_whisk'
 require 'rspec'
@@ -15,11 +14,11 @@ Before do | scenario |
           name: "#{scenario.feature.name} - #{scenario.name}",
           appiumVersion: '1.9.1',
           browserName: '',
-          build: 'Appium Cucumber Examples'
+          build: 'Appium-Ruby-Cucumber Examples'
       }
   }
 
-  @driver = Appium::Driver.new(caps)
+  @driver = Appium::Driver.new(caps, true)
   @driver.start_driver
 end
 
