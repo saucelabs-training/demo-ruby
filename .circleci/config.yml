@@ -22,14 +22,14 @@ jobs:
             cd appium-examples/RSpec/emusim
             gem install rake
             gem install bundler
-            bundle install
+            bundle install --path .bundle
       - run:
           name: "Install Appium-Cucumber Dependencies"
           command: |
             cd appium-examples/Cucumber/emusim
             gem install rake
             gem install bundler
-            bundle install
+            bundle install --path .bundle
       - run:
           name: "Install Sauce Connect Client"
           command: |
