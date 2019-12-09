@@ -10,26 +10,12 @@ jobs:
           name: "Install dependencies"
           command: |
             sudo apt-get update
-      - run:
-          name: "Install On-Boarding RSpec Dependencies"
-          command: |
-            cd on-boarding-modules
-            chmod +x setup.sh
-            ./setup.sh
-      - run:
-          name: "Install Appium-RSpec Dependencies"
-          command: |
-            cd appium-examples/RSpec/emusim
-            gem install rake
-            gem install bundler
-            bundle install --path .bundle
-      - run:
-          name: "Install Appium-Cucumber Dependencies"
-          command: |
-            cd appium-examples/Cucumber/emusim
-            gem install rake
-            gem install bundler
-            bundle install --path .bundle
+#      - run:
+#          name: "Install On-Boarding RSpec Dependencies"
+#          command: |
+#            cd on-boarding-modules
+#            chmod +x setup.sh
+#            ./setup.sh
       - run:
           name: "Install Sauce Connect Client"
           command: |
@@ -47,16 +33,25 @@ jobs:
           command: |
             while ! lsof -i:4445 -t; do sleep 3; done
             cd on-boarding-modules
+            gem install bundler
+            gem install rails
+            bundle install
             bundle exec rspec
       - run:
-          name: "Run Appium-RSpec EmuSim Examples"
+          name: "Run Appium-RSpec Tests"
           command: |
             cd appium-examples/RSpec/emusim
+            gem install rake
+            gem install bundler
+            bundle install
             rake test_sauce
       - run:
-          name: "Run Appium-Cucumber EmuSim Examples"
+          name: "Run Appium-Cucumber Tests"
           command: |
             cd appium-examples/Cucumber/emusim
+            gem install rake
+            gem install bundler
+            bundle install
             rake test_sauce
       - run:
           name: "Shut Down Sauce Connect Tunnel"
