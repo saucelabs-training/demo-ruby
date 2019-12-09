@@ -14,7 +14,8 @@ Before do | scenario |
           deviceOrientation: 'portrait',
           name: "#{scenario.feature.name} - #{scenario.name}",
           appiumVersion: '1.9.1',
-          browserName: ''
+          browserName: '',
+          build: 'Appium Cucumber Examples'
       }
   }
 

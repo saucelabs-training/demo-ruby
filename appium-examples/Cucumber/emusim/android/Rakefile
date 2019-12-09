@@ -1,21 +1,21 @@
 def run_tests(deviceName, platformName, platformVersion, app)
-  system("deviceName=\"#{deviceName}\" platformName=\"#{platformName}\" platformVersion=\"#{platformVersion}\" app=\"#{app}\" parallel_split_test spec")
+  system("deviceName=\"#{deviceName}\" platformName=\"#{platformName}\" platformVersion=\"#{platformVersion}\" app=\"#{app}\" parallel_cucumber features -n 20")
 end
 
 task :Andoid_Emulator_Phone_5_1 do
-  run_tests('Android Emulator', 'Android', '5.1', 'http://saucelabs.com/example_files/ContactManager.apk')
+  run_tests('Android Emulator', 'Android', '5.1', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
 end
 
 task :Andoid_Emulator_Tablet_5_1 do
-  run_tests('Android Emulator', 'Android', '5.1', 'http://saucelabs.com/example_files/ContactManager.apk')
+  run_tests('Android Emulator', 'Android', '5.1', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
 end
 
 task :Galaxy_S8_Emulator do
-  run_tests('Samsung Galaxy S8 HD GoogleAPI Emulator', 'Android', '7.0', 'http://saucelabs.com/example_files/ContactManager.apk')
+  run_tests('Samsung Galaxy S8 HD GoogleAPI Emulator', 'Android', '7.0', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
 end
 
 task :Galaxy_S6_Emulator do
-  run_tests('Samsung Galaxy S6 GoogleAPI Emulator', 'Android', '7.0', 'http://saucelabs.com/example_files/ContactManager.apk')
+  run_tests('Samsung Galaxy S6 GoogleAPI Emulator', 'Android', '7.0', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
 end
 
 multitask :test_sauce => [

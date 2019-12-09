@@ -1,14 +1,14 @@
-Given /^I click on the add contact button$/ do
-  addContactButton = @driver.find_element(:class_name, "android.widget.Button")
-  addContactButton.click()
+Given /^I click on the comment box$/ do
+  commentInput = @driver.find_element(:id, "comments")
+  commentInput.click()
 end
 
-When /^I enter a name and email$/ do
-  textFieldsList = @driver.find_elements(:class_name, "android.widget.EditText")
-  textFieldsList[0].send_keys("Some Name")
-  textFieldsList[2].send_keys("Some@example.com")
+When /^I enter a comment$/ do
+  commentText = @driver.find_element(:id, "comments")
+  commentText.send_keys("My Exceptionally Eloquent Comment")
 end
 
-Then /^I click the Save button$/ do
-  @driver.find_element(:class_name, "android.widget.Button").click
+Then /^I click the send button$/ do
+  submitButton = @driver.find_element(:id, "submit")
+  submitButton.click()
 end

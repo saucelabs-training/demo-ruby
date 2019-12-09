@@ -25,7 +25,8 @@ RSpec.configure do | config |
             deviceOrientation: 'portrait',
             name: example.full_description,
             appiumVersion: '1.9.1',
-            browserName: ''
+            browserName: '',
+            build: 'Appium RSpec Examples'
         }
     }
 

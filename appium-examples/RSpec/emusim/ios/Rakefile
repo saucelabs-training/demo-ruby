@@ -3,24 +3,24 @@ def run_tests(deviceName, platformName, platformVersion, app)
 end
 
 task :iPhone_6_Simulator do
-  run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://github.com/saucelabs-training/demo-java/tree/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+  run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
 end
 
-task :iPhone_11_Pro_Simulator do
-  run_tests('iPhone 11 Pro Simulator', 'iOS', '13.0', 'https://github.com/saucelabs-training/demo-java/tree/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+task :iPhone_5s_Simulator do
+  run_tests('iPhone 5s Simulator', 'iOS', '11.1', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
 end
 
 task :iPad_Air_Simulator do
-  run_tests('iPad Air Simulator', 'iOS', '11.2', 'https://github.com/saucelabs-training/demo-java/tree/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+  run_tests('iPad Air Simulator', 'iOS', '11.2', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
 end
 
 task :iPad_Simulator do
-  run_tests('iPad (6th generation) Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/tree/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
+  run_tests('iPad (6th generation) Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
 end
 
 multitask :test_sauce => [
     :iPhone_6_Simulator,
-    :iPhone_11_Pro_Simulator,
+    :iPhone_5s_Simulator,
     :iPad_Air_Simulator,
     :iPad_Simulator,
 

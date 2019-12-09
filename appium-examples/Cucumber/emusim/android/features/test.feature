@@ -1,6 +1,6 @@
 Feature: Sample Android Test
 
-  Scenario: Add a Contact
-    Given I click on the add contact button
-    When I enter a name and email
-    Then I click the Save button
+  Scenario: Add a Comment
+    Given I click on the comment box
+    When I enter a comment
+    Then I click the send button
