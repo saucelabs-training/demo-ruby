@@ -11,7 +11,7 @@ Before do | scenario |
           platformName: "#{ENV['platformName']}",
           app: "#{ENV['app']}",
           deviceOrientation: 'portrait',
-          name: example.full_description,
+          name: "#{scenario.feature.name} - #{scenario.name}",
           appiumVersion: '1.9.1',
           browserName: '',
           build: 'Appium-Ruby-Cucumber EmuSim Examples'
