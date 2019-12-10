@@ -2,12 +2,14 @@ require "rspec/expectations"
 require "appium_lib"
 require "rspec"
 require "sauce_whisk"
+require "selenium-webdriver"
+require "require_all"
 
-# begin
-#   require_all "#{File.join(File.expand_path(File.dirname(__FILE__)), '..', 'pages')}"
-# rescue
-#   puts "no page objects found"
-# end
+begin
+  require_all "#{File.join(File.expand_path(File.dirname(__FILE__)), '..', 'pages')}"
+rescue
+  puts "no page objects found"
+end
 
 
 RSpec.configure do | config |
