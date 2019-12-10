@@ -1,0 +1,36 @@
+AllCops:
+  TargetRubyVersion: 2.5.6
+
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/*_spec.rb"
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/ModuleLength:
+  CountComments: false
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/DescribedClass:
+  EnforcedStyle: explicit
+
+RSpec/InstanceVariable:
+  Enabled: false
