@@ -6,10 +6,10 @@ Before do | scenario |
   # need to configure env variables for browser
   caps = {
       caps: {
-          platformVersion: "#{ENV[platformVersion]}",
-          deviceName: "#{ENV[deviceName]}",
-          platformName: "#{ENV[platformName]}",
-          app: "#{ENV[app]}",
+          platformVersion: "#{ENV['platformVersion']}",
+          deviceName: "#{ENV['deviceName']}",
+          platformName: "#{ENV['platformName']}",
+          app: "#{ENV['app']}",
           deviceOrientation: 'portrait',
           name: example.full_description,
           appiumVersion: '1.9.1',
