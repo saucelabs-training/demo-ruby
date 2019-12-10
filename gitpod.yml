@@ -1,4 +1,4 @@
 tasks:
   - before: chmod +x setup.sh
-    init: ./setup.sh
+    init: ./on-boarding-modules/setup.sh
     command: rbenv -v

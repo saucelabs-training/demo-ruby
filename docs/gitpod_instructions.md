@@ -5,7 +5,7 @@
 3. Click the button and follow the instructions to allow gitpod access to GitHub.
 4. After the session launches, navigate to the terminal and use the following commands to [export your Sauce Labs credentials:](https://wiki.saucelabs.com/display/DOCS/Best+Practice%3A+Use+Environment+Variables+for+Authentication+Credentials)
 ```
-eval $(gp env -e SAUCE_USERNAME=******)
+b SAUCE_USERNAME=******)
 eval $(gp env -e SAUCE_ACCESS_KEY=******)
 ```
 
