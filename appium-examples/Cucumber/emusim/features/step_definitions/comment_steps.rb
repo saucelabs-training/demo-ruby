@@ -1,14 +1,14 @@
 Given /^I click on the comment box$/ do
-  commentInput = @driver.find_element(:id, "comments")
-  commentInput.click()
+  comment_input = @driver.find_element(:id, "comments")
+  comment_input.click()
 end
 
 When /^I enter a comment$/ do
-  commentText = @driver.find_element(:id, "comments")
-  commentText.send_keys("My Exceptionally Eloquent Comment")
+  comment_text = @driver.find_element(:id, "comments")
+  comment_text.send_keys("My Exceptionally Eloquent Comment")
 end
 
 Then /^I click the send button$/ do
-  submitButton = @driver.find_element(:id, "submit")
-  submitButton.click()
+  submit_button = @driver.find_element(:id, "submit")
+  submit_button.click()
 end

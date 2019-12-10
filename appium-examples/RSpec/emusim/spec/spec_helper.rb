@@ -18,10 +18,10 @@ RSpec.configure do | config |
 
     caps = {
         caps: {
-            platformVersion: "#{ENV['platformVersion']}",
-            deviceName: "#{ENV['deviceName']}",
-            platformName: "#{ENV['platformName']}",
-            app: "#{ENV['app']}",
+            platformVersion: "#{ENV[platformVersion]}",
+            deviceName: "#{ENV[deviceName]}",
+            platformName: "#{ENV[platformName]}",
+            app: "#{ENV[app]}",
             deviceOrientation: 'portrait',
             name: example.full_description,
             appiumVersion: '1.9.1',

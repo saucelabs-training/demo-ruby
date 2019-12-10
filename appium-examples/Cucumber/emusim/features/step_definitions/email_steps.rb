@@ -1,14 +1,14 @@
 Given /^I click on the email box$/ do
-  emailInput = @driver.find_element(:id, "fbemail")
-  emailInput.click()
+  email_input = @driver.find_element(:id, "fbemail")
+  email_input.click()
 end
 
 When /^I enter my email address$/ do
-  emailText = @driver.find_element(:id, "fbemail")
-  emailText.send_keys("example@email.com")
+  email_text = @driver.find_element(:id, "fbemail")
+  email_text.send_keys("example@email.com")
 end
 
 Then /^I click the submit button$/ do
-  submitButton = @driver.find_element(:id, "submit")
-  submitButton.click()
+  submit_button = @driver.find_element(:id, "submit")
+  submit_button.click()
 end
