@@ -1,5 +1,9 @@
 AllCops:
-  TargetRubyVersion: 2.4.6
+  TargetRubyVersion: 2.5.6
+
+require:
+  - rubocop-rspec
+  - rubocop-performance
 
 Metrics/MethodLength:
   Exclude:
