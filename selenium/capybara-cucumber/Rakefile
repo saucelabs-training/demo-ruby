@@ -5,7 +5,7 @@ require 'rspec/core/rake_task'
 #
 # For use in building a unique Build Name for running tests in parallel on Sauce Labs from a local machine
 #
-ENV['SAUCE_START_TIME'] = "Ruby-Cucumber-Capybara: Local-#{Time.now.to_i}"
+ENV['SAUCE_START_TIME'] = Time.now.to_i.to_s
 
 #
 # Uses parallel_test gem to set the number of tests that get run in parallel

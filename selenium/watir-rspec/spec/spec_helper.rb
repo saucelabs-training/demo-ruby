@@ -1,82 +1,65 @@
 # frozen_string_literal: true
 
 require 'watir'
-require 'sauce_whisk'
+require 'simple_sauce'
 
 RSpec.configure do |config|
-  config.define_derived_metadata do |meta|
-    meta[:aggregate_failures] = true
-  end
-
   config.before do |example|
-    options = platform(example.full_description)
+    opts = platform.merge(name: example.full_description,
+                          build: build_name)
+    sauce_options = SimpleSauce::Options.new(opts)
 
-    browser = options.delete(:browser_name)
+    @session = SimpleSauce::Session.new(sauce_options)
 
-    @browser = Watir::Browser.new browser, options
+    @browser = Watir::Browser.new @session.start
   end
 
   config.after do |example|
-    SauceWhisk::Jobs.change_status(@browser.wd.session_id, !example.exception)
-
-    @browser.quit
+    @session.stop(!example.exception)
   end
 
   #
   # Note that having this as a conditional in the test code is less ideal
   # It is better for static data to be pulled from a serialized file like a yaml
   #
-  # Note: not all browsers are defaulting to using w3c protocol
-  # This will change soon. Where possible prefer the w3c approach
-  #
-  def platform(name)
+  def platform
     ENV['PLATFORM'] ||= 'mac_sierra_chrome'
-    SauceWhisk.data_center = :US_WEST
 
     case ENV['PLATFORM']
     when 'windows_10_edge'
-      common_params(name).merge(platform_name: 'Windows 10',
-                                browser_name: 'edge')
+      {platform_name: 'Windows 10',
+       browser_name: 'MicrosoftEdge',
+       browser_version: '18.17763'}
     when 'windows_8_ie'
-      common_params(name).merge(platform: 'Windows 8.1',
-                                browser_name: 'ie')
+      {platform_name: 'Windows 8.1',
+       browser_name: 'internet explorer',
+       browser_version: '11.0'}
     when 'mac_sierra_chrome'
-      common_params(name).merge(platform_name: 'macOS 10.12',
-                                browser_name: 'chrome')
+      {platform_name: 'macOS 10.12',
+       browser_name: 'chrome',
+       browser_version: '75.0'}
     when 'mac_mojave_safari'
-      common_params(name).merge(platform_name: 'macOS 10.14',
-                                browser_name: 'safari')
+      {platform_name: 'macOS 10.14',
+       browser_name: 'safari',
+       browser_version: '12.0'}
     when 'windows_7_ff'
-      common_params(name).merge(platform_name: 'Windows 7',
-                                browser_name: 'firefox')
+      {platform_name: 'Windows 7',
+       browser_name: 'firefox',
+       browser_version: '60.0'}
     when 'headless'
-      SauceWhisk.data_center = :US_EAST
-      common_params(name).merge(platform_name: 'Linux',
-                                browser_name: 'chrome',
-                                url: 'https://ondemand.us-east-1.saucelabs.com:443/wd/hub')
+      ENV['SAUCE_DATA_CENTER'] = 'US_EAST'
+      {platform_name: 'Linux',
+       browser_name: 'chrome'}
     end
   end
 
-  def common_params(name)
-    {url: 'https://ondemand.saucelabs.com:443/wd/hub',
-     browser_version: 'latest',
-     'sauce:options' => {name: name,
-                         build: build_name,
-                         username: ENV['SAUCE_USERNAME'],
-                         access_key: ENV['SAUCE_ACCESS_KEY']}}
-  end
-
   #
-  # Note that this build name is specifically for Travis CI execution
-  # Most CI tools have ENV variables that can be structured to provide useful build names
+  # Give a good build name when running locally
   #
   def build_name
-    if ENV['TRAVIS_REPO_SLUG']
-      "#{ENV['TRAVIS_REPO_SLUG'][%r{[^/]+$}]}: #{ENV['TRAVIS_JOB_NUMBER']}"
-    elsif ENV['SAUCE_START_TIME']
-      ENV['SAUCE_START_TIME']
-    else
-      "Ruby-Watir-Selenium: Local-#{Time.now.to_i}"
-    end
+    return if ENV['TRAVIS_REPO_SLUG']
+
+    time = ENV['SAUCE_START_TIME'] || Time.now.to_i.to_s
+    "RSpec Example: Local-#{time}"
   end
 end

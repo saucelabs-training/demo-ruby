@@ -5,6 +5,9 @@ require:
   - rubocop-rspec
   - rubocop-performance
 
+Metrics/CyclomaticComplexity:
+  Max: 8
+
 Metrics/MethodLength:
   Exclude:
     - 'features/support/env.rb'

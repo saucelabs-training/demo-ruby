@@ -9,6 +9,9 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/spec_helper.rb'
 
+Metrics/CyclomaticComplexity:
+  Max: 8
+
 Metrics/MethodLength:
   Exclude:
     - 'spec/spec_helper.rb'

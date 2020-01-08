@@ -19,7 +19,7 @@ GEM
     parallel_split_test (0.7.0)
       parallel (>= 0.5.13)
       rspec (>= 3.1.0)
-    parser (2.7.0.0)
+    parser (2.7.0.1)
       ast (~> 2.4.0)
     rainbow (3.0.0)
     rake (13.0.1)
@@ -32,19 +32,19 @@ GEM
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
-    rspec-core (3.9.0)
-      rspec-support (~> 3.9.0)
+    rspec-core (3.9.1)
+      rspec-support (~> 3.9.1)
     rspec-expectations (3.9.0)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-mocks (3.9.0)
+    rspec-mocks (3.9.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.9.0)
-    rspec-support (3.9.0)
-    rubocop (0.78.0)
+    rspec-support (3.9.2)
+    rubocop (0.79.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
-      parser (>= 2.6)
+      parser (>= 2.7.0.1)
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.7)
@@ -60,6 +60,9 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    simple_sauce (1.0.0.pre.alpha.1)
+      sauce_whisk
+      selenium-webdriver (~> 3.142.0, >= 3.142.7)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
@@ -76,7 +79,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rspec
   sauce_whisk
-  selenium-webdriver
+  simple_sauce (~> 1.0.0.pre.alpha)
 
 BUNDLED WITH
    2.0.2
