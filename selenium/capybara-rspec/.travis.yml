@@ -1,0 +1,11 @@
+language: ruby
+rvm: 2.5.3
+script: bundle exec rake sauce_demo
+notifications:
+  email:
+    recipients:
+    - titus@saucelabs.com
+env:
+  global:
+  - SAUCE_USERNAME=sauce_examples
+  - secure: QYuuxmJEla4Mn1WH0MItsuMVQsecokryD/CU+dH3jtEVhJNyVkrx4GDl/uw2xPaRrqRuAavtZgML1nPcTOk96rAqSlEoULy1OBrvj+32kZCVlhmTlW4x+NRTQMjS10C0hygNA4qXGXgtsvgYH4OMoK3j9PFFnQg0cSSTu67T75/xOkPBRS8QinKUquQhz6Z5Iy9hyudSAku5DknSG7SxKFSVTfrYZh+lczoyZu5f3YTnYhkcyOjMyx/ZLy6F6cCuUI5GJ4IV0KcpryPo09PvNFWQdPbHMw+w0Ep2QDqkNcfumcdghCfCeZft1yBOoy5b4w5Rc7keAFp4wrS9LvjB1BAOaGZTQKHqBtt9zwJlJAFJzIyltFPmjj8UOi5G2XzzVIMCJRHl/I5gnCkLz2wy9KvOhx5YDQkuk6LRTdQ/8adDB9EFlxdGU1KhRlyKX9CFExOlmHPAYjB33m1PnApW2d1UWjx/tm6VJTdizgsZd0gKcJBeEVEbae5lKBE+cy/cgmpOrKc+laJQ/0pPXOXbKKdcFSt8ZVAKaKnOE81JNL0rpLHnBhU/6VqfR5ywsCNAdeeK/a/eFKPo96culCfokURvcDW6IF0B8NrhjC/LmftVVw930JO/R7YutTO+qcBG3EL5R8QfdsdNE/k1JMbNn0bA5BldjKa+q/f7KjIgcyQ=
