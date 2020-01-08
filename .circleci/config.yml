@@ -10,33 +10,81 @@ jobs:
           name: "Install dependencies"
           command: |
             sudo apt-get update
-#      - run:
-#          name: "Install On-Boarding RSpec Dependencies"
-#          command: |
-#            cd on-boarding-modules
-#            chmod +x setup.sh
-#            ./setup.sh
+      #      - run:
+      #          name: "Install On-Boarding RSpec Dependencies"
+      #          command: |
+      #            cd on-boarding-modules
+      #            chmod +x setup.sh
+      #            ./setup.sh
       - run:
           name: "Install Sauce Connect Client"
           command: |
             sudo apt-get install lsof
             curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
             tar -xzf saucelabs.tar.gz
+#      - run:
+#          name: "Launch Tunnel"
+#          background: true
+#          command: |
+#            cd sc-*
+#            bin/sc --pidfile /tmp/sc.pid1 -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -i demo-ruby-tunnel --no-remove-colliding-tunnels --se-port 4445
       - run:
-          name: "Launch Tunnel"
-          background: true
-          command: |
-            cd sc-*
-            bin/sc --pidfile /tmp/sc.pid1 -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -i demo-python-tunnel --no-remove-colliding-tunnels --se-port 4445
-      - run:
-          name: "Run RSPEC Desktop Tests"
+          name: "Run On-Boarding Tests"
           command: |
             while ! lsof -i:4445 -t; do sleep 3; done
-            cd on-boarding-modules
+            cd on-boarding-modules/rspec
             gem install bundler
             gem install rails
             bundle install
             bundle exec rspec
+      - run:
+          name: "Run selenium-capybara-cucumber Tests"
+          command: |
+            cd selenium/capybara-cucumber
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
+      - run:
+          name: "Run selenium-capybara-rspec Tests"
+          command: |
+            cd selenium/capybara-rspec
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
+      - run:
+          name: "Run selenium-cucumber Tests"
+          command: |
+            cd selenium/cucumber
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
+      - run:
+          name: "Run selenium-rspec Tests"
+          command: |
+            cd selenium/rspec
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
+      - run:
+          name: "Run selenium-watir-cucumber Tests"
+          command: |
+            cd selenium/watir-cucumber
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
+      - run:
+          name: "Run selenium-watir-rspec Tests"
+          command: |
+            cd selenium/watir-rspec
+            gem install rake
+            gem install bundler
+            bundle install
+            bundle exec rake sauce_demo
       - run:
           name: "Run Appium-RSpec Tests"
           command: |
@@ -44,7 +92,7 @@ jobs:
             gem install rake
             gem install bundler
             bundle install
-            rake test_sauce
+            bundle exec rake test_sauce
       - run:
           name: "Run Appium-Cucumber Tests"
           command: |
@@ -52,8 +100,8 @@ jobs:
             gem install rake
             gem install bundler
             bundle install
-            rake test_sauce
-      - run:
-          name: "Shut Down Sauce Connect Tunnel"
-          command: |
-            kill -9 `cat /tmp/sc.pid1`
+            bundle exec rake test_sauce
+#      - run:
+#          name: "Shut Down Sauce Connect Tunnel"
+#          command: |
+#            kill -9 `cat /tmp/sc.pid1`
