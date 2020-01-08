@@ -4,7 +4,11 @@ require 'watir'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.before(:each) do |example|
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
+  config.before do |example|
     options = platform(example.full_description)
 
     browser = options.delete(:browser_name)
@@ -12,7 +16,7 @@ RSpec.configure do |config|
     @browser = Watir::Browser.new browser, options
   end
 
-  config.after(:each) do |example|
+  config.after do |example|
     SauceWhisk::Jobs.change_status(@browser.wd.session_id, !example.exception)
 
     @browser.quit

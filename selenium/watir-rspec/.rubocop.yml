@@ -1,5 +1,9 @@
 AllCops:
-  TargetRubyVersion: 2.4.6
+  TargetRubyVersion: 2.5.3
+
+require:
+  - rubocop-rspec
+  - rubocop-performance
 
 Metrics/BlockLength:
   Exclude:
@@ -22,3 +26,15 @@ Metrics/LineLength:
 
 Layout/SpaceInsideHashLiteralBraces:
   EnforcedStyle: no_space
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/InstanceVariable:
+  Enabled: false
