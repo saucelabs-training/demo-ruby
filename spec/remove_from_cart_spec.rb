@@ -8,16 +8,18 @@
 require 'spec_helper'
 
 describe 'Cart' do
-  before { @driver.get 'https://www.saucedemo.com/inventory.html' }
+  let(:driver) { @driver }
+
+  before { driver.get 'https://www.saucedemo.com/inventory.html' }
 
   it 'removes one' do
-    @driver.find_element(class: 'btn_primary').click
-    @driver.find_element(class: 'btn_primary').click
+    driver.find_element(class: 'btn_primary').click
+    driver.find_element(class: 'btn_primary').click
 
-    @driver.find_element(class: 'btn_secondary').click
-    expect(@driver.find_element(class: 'shopping_cart_badge').text).to eq '1'
+    driver.find_element(class: 'btn_secondary').click
+    expect(driver.find_element(class: 'shopping_cart_badge').text).to eq '1'
 
-    @driver.get 'https://www.saucedemo.com/cart.html'
-    expect(@driver.find_elements(class: 'inventory_item_name').size).to eq 1
+    driver.get 'https://www.saucedemo.com/cart.html'
+    expect(driver.find_elements(class: 'inventory_item_name').size).to eq 1
   end
 end

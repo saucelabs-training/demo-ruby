@@ -4,6 +4,10 @@ require 'selenium-webdriver'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
   config.before do |example|
     create_session(example.full_description)
   end

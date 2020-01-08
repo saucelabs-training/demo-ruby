@@ -86,9 +86,7 @@ end
 
 desc 'Sauce Labs Demo to run multiple platforms simultaneously'
 multitask sauce_demo: PLATFORMS.map { |p| "#{p}_demo" } do
-  begin
-    raise StandardError, 'Tests failed!' unless @success
-  ensure
-    @success &= @result
-  end
+  raise StandardError, 'Tests failed!' unless @success
+ensure
+  @success &= @result
 end
