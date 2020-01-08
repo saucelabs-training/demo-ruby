@@ -1,0 +1,24 @@
+AllCops:
+  TargetRubyVersion: 2.4.6
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: no_space
