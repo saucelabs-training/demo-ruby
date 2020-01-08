@@ -69,6 +69,10 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 1.6)
+    rubocop-performance (1.1.0)
+      rubocop (>= 0.67.0)
+    rubocop-rspec (1.35.0)
+      rubocop (>= 0.60.0)
     ruby-progressbar (1.10.0)
     rubyzip (1.2.2)
     sauce_whisk (0.2.0)
@@ -93,8 +97,10 @@ DEPENDENCIES
   rake
   rspec
   rubocop
+  rubocop-performance
+  rubocop-rspec (~> 1.32)
   sauce_whisk
   selenium-webdriver
 
 BUNDLED WITH
-   2.0.1
+   2.0.2

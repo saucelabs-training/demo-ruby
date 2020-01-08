@@ -12,7 +12,11 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Capybara::RSpecMatchers
 
-  config.before(:each) do |test|
+  config.define_derived_metadata do |meta|
+    meta[:aggregate_failures] = true
+  end
+
+  config.before do |test|
     Capybara.register_driver :sauce do |app|
       opt = platform(test.full_description)
 
@@ -27,7 +31,7 @@ RSpec.configure do |config|
     Capybara.current_driver = :sauce
   end
 
-  config.after(:each) do |test|
+  config.after do |test|
     session_id = Capybara.current_session.driver.browser.session_id
     SauceWhisk::Jobs.change_status(session_id, !test.exception)
     Capybara.current_session.quit
