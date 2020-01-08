@@ -9,15 +9,11 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/spec_helper.rb'
 
-Metrics/MethodLength:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
-Metrics/AbcSize:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
+Metrics/MethodLength:
   Exclude:
     - 'spec/spec_helper.rb'
 
@@ -30,11 +26,11 @@ Layout/SpaceInsideHashLiteralBraces:
 RSpec/DescribeClass:
   Enabled: false
 
-RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/ExampleLength:
-  Enabled: false
-
 RSpec/InstanceVariable:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 2
+
+RSpec/ExampleLength:
+  Max: 10
