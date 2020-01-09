@@ -9,7 +9,7 @@ describe "Instant_RSpec_Test3" do
         - defining the browser name
         - defining the browser version
         - defining the OS version and platform
-        - defining the sauce:options capabilities, in this case the test name, the SauceLabs credentials, and the selenium version
+        - defining the sauce:options capabilities, in this case the test name, the SauceLabs credentials, and the selenium-examples version
 =end
 
   before(:each) do |test|

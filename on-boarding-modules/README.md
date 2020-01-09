@@ -1,4 +1,4 @@
-# Sauce Labs On-Boarding JavaScript Examples
+# Sauce Labs On-Boarding Ruby Examples
 
 The following scripts provide quick examples to test your connection to Sauce Labs. Each script, titled `module<#>-<framework_name>`, represents a module from the "Getting Started" tab in the Sauce labs UI.
 

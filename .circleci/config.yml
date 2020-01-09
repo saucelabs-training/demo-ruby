@@ -37,49 +37,49 @@ jobs:
             bundle install
             bundle exec rspec
       - run:
-          name: "Run selenium-capybara-cucumber Tests"
+          name: "Run selenium-examples-capybara-cucumber Tests"
           command: |
-            cd selenium/capybara-cucumber
+            cd selenium-examples/capybara-cucumber
             gem install rake
             gem install bundler
             bundle install
             bundle exec rake sauce_demo
       - run:
-          name: "Run selenium-capybara-rspec Tests"
+          name: "Run selenium-examples-capybara-rspec Tests"
           command: |
-            cd selenium/capybara-rspec
+            cd selenium-examples/capybara-rspec
             gem install rake
             gem install bundler
             bundle install
             bundle exec rake sauce_demo
       - run:
-          name: "Run selenium-cucumber Tests"
+          name: "Run selenium-examples-cucumber Tests"
           command: |
-            cd selenium/cucumber
+            cd selenium-examples/cucumber
             gem install rake
             gem install bundler
             bundle install
             bundle exec rake sauce_demo
       - run:
-          name: "Run selenium-rspec Tests"
+          name: "Run selenium-examples-rspec Tests"
           command: |
-            cd selenium/rspec
+            cd selenium-examples/rspec
             gem install rake
             gem install bundler
             bundle install
             bundle exec rake sauce_demo
       - run:
-          name: "Run selenium-watir-cucumber Tests"
+          name: "Run selenium-examples-watir-cucumber Tests"
           command: |
-            cd selenium/watir-cucumber
+            cd selenium-examples/watir-cucumber
             gem install rake
             gem install bundler
             bundle install
             bundle exec rake sauce_demo
       - run:
-          name: "Run selenium-watir-rspec Tests"
+          name: "Run selenium-examples-watir-rspec Tests"
           command: |
-            cd selenium/watir-rspec
+            cd selenium-examples/watir-rspec
             gem install rake
             gem install bundler
             bundle install

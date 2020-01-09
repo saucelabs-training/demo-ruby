@@ -1,4 +1,4 @@
-require 'selenium/webdriver'
+require 'selenium-webdriver'
 require 'rspec'
 
 =begin
@@ -19,7 +19,7 @@ describe "Instant_RSpec_Test2" do
         platform_version: 'macOS 10.13',
         browser_version: '11.1',
         # the sauce:options field allows us to define sauce labs-specific test parameters
-        # such as: sauce username and access key, timeouts, selenium version etc.
+        # such as: sauce username and access key, timeouts, selenium-examples version etc.
         "sauce:options" => {
             build: 'Onboarding Sample App - Ruby',
             name: '2-user-site',
