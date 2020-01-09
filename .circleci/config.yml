@@ -24,14 +24,13 @@ jobs:
             tar -xzf saucelabs.tar.gz
 #      - run:
 #          name: "Launch Tunnel"
-#          background: true
 #          command: |
 #            cd sc-*
 #            bin/sc --pidfile /tmp/sc.pid1 -u ${SAUCE_USERNAME} -k ${SAUCE_ACCESS_KEY} -i demo-ruby-tunnel --no-remove-colliding-tunnels --se-port 4445
+#            while ! lsof -i:4445 -t; do sleep 3; done
       - run:
           name: "Run On-Boarding Tests"
           command: |
-            while ! lsof -i:4445 -t; do sleep 3; done
             cd on-boarding-modules/rspec
             gem install bundler
             gem install rails
