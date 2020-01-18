@@ -8,8 +8,8 @@ sauce_info = {}
 
 capabilities = {}
 
-driver = Selenium::WebDriver.for :remote,
+@driver = Selenium::WebDriver.for :remote,
                                  url: sauce_url,
                                  desired_capabilities: capabilities
 
-driver.quit
+@driver.quit

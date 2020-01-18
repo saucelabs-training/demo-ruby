@@ -4,8 +4,8 @@
 
 1. [Sign up for a Sauce Labs Account](https://saucelabs.com/sign-up)
 2. [Sign up for a Github account](https://github.com/join)
-3. [Open the Gitpod](https://gitpod.io/#https://github.com/sauce-examples/ruby-example)
-4. Sign in to Github if necessary to access Gitpod
+3. Verify your Email Address if necessary
+4. [Open the Gitpod](https://gitpod.io/#github.com/saucelabs-training/demo-ruby/tree/master/intro)
 5. Open `open_browser.rb` file
 6. Locate your [Sauce Labs Credentials](https://app.saucelabs.com/user-settings)
 7. Paste the credentials where it says "<SAUCE_USERNAME>" and "<SAUCE_ACCESS_KEY>"
