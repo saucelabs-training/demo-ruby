@@ -77,7 +77,9 @@ RSpec.configure do |config|
   # Most CI tools have ENV variables that can be structured to provide useful build names
   #
   def build_name
-    if ENV['TRAVIS_REPO_SLUG']
+    if ENV['BUILD_TAG']
+      ENV['BUILD_TAG']
+    elsif ENV['TRAVIS_REPO_SLUG']
       "#{ENV['TRAVIS_REPO_SLUG'][%r{[^/]+$}]}: #{ENV['TRAVIS_JOB_NUMBER']}"
     elsif ENV['SAUCE_START_TIME']
       ENV['SAUCE_START_TIME']

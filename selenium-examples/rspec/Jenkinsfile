@@ -1,0 +1,28 @@
+pipeline {
+  agent { docker { image 'ruby:2.6.5' } }
+    stages {
+        stage('build') {
+            steps {
+                dir("selenium-examples/rspec") {
+                    sh 'gem install bundler'
+                    sh 'bundle install'
+                }
+            }
+        }
+        stage('test') {
+            steps {
+                dir("selenium-examples/rspec") {
+                    sauce("1abec5f1-7d11-415f-b10b-2876380b2b63") {
+                        sh 'bundle exec rake $RAKE_JOB'
+                    }
+                }
+            }
+        }
+        stage('report') {
+            steps {
+                sh 'sleep 30'
+                saucePublisher()
+            }
+        }
+    }
+}
