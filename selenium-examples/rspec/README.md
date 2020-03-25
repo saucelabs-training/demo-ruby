@@ -10,7 +10,7 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     * [Install Git](https://github.com/saucelabs-training/Getting-Started-with-Selenium/blob/master/README.md#install-git)
     * Clone This Repo
     ```
-    $ git clone ruby-rspec-selenium https://github.com/saucelabs-sample-test-frameworks/Ruby-RSpec-Selenium.git
+    $ git clone https://github.com/saucelabs-training/demo-ruby.git
     ```
     * Install bundler
     ```
@@ -25,8 +25,11 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     $ export SAUCE_ACCESS_KEY=<your Sauce Labs access key>
     ```
 
-3. Project Dependencies
-	* Install packages
+3. Navigate to the `rspec` directory (`/selenium-examples/rspec/`)
+	```
+	$ cd selenium-examples/rspec
+	```
+4. Install the `gem` packages
 	```
 	$ bundle install
 	```
