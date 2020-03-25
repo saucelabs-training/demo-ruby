@@ -17,6 +17,8 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
     $ gem install bundler
     ```
 
+<br />
+
 2. Sauce Credentials
     * Add the following Sauce Labs Credentials as environmental variables
     (specific details will vary depending on Operating System).
@@ -34,6 +36,8 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 	$ bundle install
 	```
 
+<br />
+
 ## Running Tests
 
 * Run tests in parallel on default configuration:
@@ -48,6 +52,8 @@ This code is provided on an "AS-IS” basis without warranty of any kind, either
 	```
 	$ bundle exec rake sauce_demo
 	```
+
+<br />
 
 ## Watch Your Tests Run
 
