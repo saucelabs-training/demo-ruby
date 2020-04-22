@@ -4,10 +4,6 @@ require 'watir'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.define_derived_metadata do |meta|
-    meta[:aggregate_failures] = true
-  end
-
   config.before do |example|
     options = platform(example.full_description)
 

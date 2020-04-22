@@ -4,10 +4,6 @@ require 'selenium-webdriver'
 require 'sauce_whisk'
 
 RSpec.configure do |config|
-  config.define_derived_metadata do |meta|
-    meta[:aggregate_failures] = true
-  end
-
   config.before do |example|
     create_session(example.full_description)
   end
@@ -22,7 +18,7 @@ RSpec.configure do |config|
     SauceWhisk.data_center = ENV['SAUCE_DC']&.to_sym || :US_WEST
 
     # Ideal implementation is to set 'PLATFORM' environment variable in a Rake task, but we always include a defualt
-    options = platform(ENV['PLATFORM'] || 'mac_sierra_chrome')
+    options = platform(ENV['PLATFORM'] || 'mac_catalina_safari')
 
     options['sauce:options'] = {name: test_name,
                                 build: build_name,
@@ -34,12 +30,14 @@ RSpec.configure do |config|
 
     browser = options.delete(:browser_name).to_sym
     capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser, options)
-    @driver = Selenium::WebDriver.for(:remote, url: url,
-                                               desired_capabilities: capabilities)
+    # @driver = Selenium::WebDriver.for(:remote, url: url,
+    #                                            desired_capabilities: capabilities)
+    #
+    @driver = Selenium::WebDriver.for :safari
   end
 
   def end_session(result)
-    SauceWhisk::Jobs.change_status(@driver.session_id, result)
+    # SauceWhisk::Jobs.change_status(@driver.session_id, result)
     @driver.quit
   end
 
@@ -58,10 +56,10 @@ RSpec.configure do |config|
       {platform_name: 'macOS 10.12',
        browser_name: 'chrome',
        browser_version: '75.0'}
-    when 'mac_mojave_safari'
-      {platform_name: 'macOS 10.14',
+    when 'mac_catalina_safari'
+      {platform_name: 'macOS 10.15',
        browser_name: 'safari',
-       browser_version: '12.0'}
+       browser_version: 'latest'}
     when 'windows_7_ff'
       {platform_name: 'Windows 7',
        browser_name: 'firefox',

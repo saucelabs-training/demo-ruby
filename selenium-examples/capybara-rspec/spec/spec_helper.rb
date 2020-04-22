@@ -12,10 +12,6 @@ RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Capybara::RSpecMatchers
 
-  config.define_derived_metadata do |meta|
-    meta[:aggregate_failures] = true
-  end
-
   config.before do |test|
     Capybara.register_driver :sauce do |app|
       opt = platform(test.full_description)
