@@ -16,12 +16,12 @@ jobs:
       #            cd on-boarding-modules
       #            chmod +x setup.sh
       #            ./setup.sh
-      - run:
-          name: "Install Sauce Connect Client"
-          command: |
-            sudo apt-get install lsof
-            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
-            tar -xzf saucelabs.tar.gz
+#      - run:
+#          name: "Install Sauce Connect Client"
+#          command: |
+#            sudo apt-get install lsof
+#            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+#            tar -xzf saucelabs.tar.gz
 #      - run:
 #          name: "Launch Tunnel"
 #          command: |
@@ -100,6 +100,15 @@ jobs:
             gem install bundler
             bundle install
             bundle exec rake test_sauce
+      - run:
+          name: "Run W3C Examples Tests"
+          command: |
+            cd w3c-examples/rspec
+            gem install rake
+            gem install bundler
+            bundle install
+            rspec chrome_example_spec.rb
+            rspec firefox_example_spec.rb
 #      - run:
 #          name: "Shut Down Sauce Connect Tunnel"
 #          command: |
