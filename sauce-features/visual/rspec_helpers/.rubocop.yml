@@ -1,0 +1,10 @@
+inherit_from:
+  - ../../../.rubocop.yml
+
+Metrics/BlockLength:
+  Exclude:
+    - "**/visual_helper.rb"
+
+RSpec/ExpectInHook:
+  Exclude:
+    - "**/visual_helper.rb"
