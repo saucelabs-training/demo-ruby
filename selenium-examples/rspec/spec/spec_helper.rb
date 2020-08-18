@@ -36,7 +36,7 @@ RSpec.configure do |config|
 
   def end_session(result)
     SauceWhisk::Jobs.change_status(@driver.session_id, result)
-    @driver.quit
+    @driver.close
   end
 
   # Ideal implementation is to do a lookup from a YAML file or the like rather than using a switch implementation
