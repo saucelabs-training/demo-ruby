@@ -1,16 +1,2 @@
-AllCops:
-  TargetRubyVersion: 2.5.6
-
-require:
-  - rubocop-rspec
-  - rubocop-performance
-
-Metrics/MethodLength:
-  Exclude:
-    - 'features/support/env.rb'
-
-Metrics/LineLength:
-  Max: 120
-
-Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
+inherit_from:
+  - ../../.rubocop.yml

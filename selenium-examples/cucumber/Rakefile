@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.options = ['--display-cop-names']
+end
 
 #
 # For use in building a unique Build Name for running tests in parallel on Sauce Labs from a local machine

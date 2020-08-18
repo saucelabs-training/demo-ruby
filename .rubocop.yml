@@ -1,5 +1,9 @@
 AllCops:
-  TargetRubyVersion: 2.5.6
+  TargetRubyVersion: 2.7.1
+  NewCops: enable
+
+inherit_from:
+  - .rubocop_todo.yml
 
 require:
   - rubocop-rspec
@@ -11,14 +15,19 @@ Layout/SpaceInsideHashLiteralBraces:
 Metrics/BlockLength:
   Exclude:
     - "**/*_spec.rb"
+    - "**/spec_helper.rb"
 
-Metrics/LineLength:
-  Max: 120
+Metrics/MethodLength:
+  Exclude:
+    - "**/*_spec.rb"
+    - "**/spec_helper.rb"
+    - "**/env.rb"
 
 Metrics/ModuleLength:
   CountComments: false
   Exclude:
-    - 'spec/**/*'
+    - "**/*_spec.rb"
+    - "**/spec_helper.rb"
 
 Style/Documentation:
   Enabled: false
@@ -29,8 +38,11 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Enabled: false
 
-RSpec/DescribedClass:
-  EnforcedStyle: explicit
+RSpec/DescribeClass:
+  Enabled: false
 
 RSpec/InstanceVariable:
   Enabled: false
+
+Style/BlockDelimiters:
+  EnforcedStyle: braces_for_chaining

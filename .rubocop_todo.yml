@@ -1,0 +1,11 @@
+Style/HashLikeCase:
+  Exclude:
+    - '**/spec_helper.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - '**/spec_helper.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - '**/spec_helper.rb'
