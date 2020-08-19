@@ -39,9 +39,9 @@ Then(/^I should see an error$/) do
 end
 
 And(/^I have (\d+) items in the Cart$/) do |number|
-  number.times { @browser.button(class: 'btn_primary').click }
+  number.to_i.times { @browser.button(class: 'btn_primary').click }
 end
 
 When(/^I remove (\d+) item$/) do |number|
-  number.times { @browser.button(class: 'btn_secondary').click }
+  number.to_i.times { @browser.button(class: 'btn_secondary').click }
 end

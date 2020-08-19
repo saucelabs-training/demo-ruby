@@ -44,5 +44,5 @@ And(/^I have (\d+) items in the Cart$/) do |number|
 end
 
 When(/^I remove (\d+) item$/) do |number|
-  number.times { @driver.find_element(class: 'btn_secondary').click }
+  number.to_i.times { @driver.find_element(class: 'btn_secondary').click }
 end

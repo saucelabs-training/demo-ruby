@@ -5,11 +5,26 @@ require 'rspec'
 require 'sauce_whisk'
 
 Before do |scenario|
-  options = platform("#{scenario.feature.name} - #{scenario.name}")
-  options[:url] = 'https://ondemand.saucelabs.com:443/wd/hub'
-  browser = options.delete(:browser_name).to_sym
+  url = 'https://ondemand.us-west-1.saucelabs.com:443/wd/hub'
+  SauceWhisk.data_center = :US_WEST
 
-  @browser = Watir::Browser.new browser, options
+  if ENV['PLATFORM_NAME'] == 'linux' # Then Headless
+    url = 'https://ondemand.us-east-1.saucelabs.com:443/wd/hub'
+    SauceWhisk.data_center = :US_EAST
+  end
+
+  browser_name = ENV['BROWSER_NAME'] || 'chrome'
+
+  options = {browser_name: browser_name,
+             platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
+             browser_version: ENV['BROWSER_VERSION'] || 'latest',
+             url: url,
+             'sauce:options': {name: "#{scenario.feature.name} - #{scenario.name}",
+                               build: build_name,
+                               username: ENV['SAUCE_USERNAME'],
+                               access_key: ENV['SAUCE_ACCESS_KEY']}}
+
+  @browser = Watir::Browser.new browser_name, options
 end
 
 After do |scenario|
@@ -19,69 +34,12 @@ After do |scenario|
 end
 
 #
-# Note that having this as a conditional in the test code is less ideal
-# It is better for static data to be pulled from a serialized file like a yaml
-#
-# Note: not all browsers are defaulting to using w3c protocol
-# This will change soon. Where possible prefer the w3c approach
-#
-def platform(name)
-  case ENV['PLATFORM']
-  when 'windows_10_edge'
-    {platform_name: 'Windows 10',
-     browser_name: 'edge',
-     browser_version: '18.17763'}.merge(sauce_w3c(name))
-  when 'windows_8_ie'
-    {platform: 'Windows 8.1',
-     browser_name: 'ie',
-     version: '11.0'}.merge(sauce_w3c(name))
-  when 'mac_sierra_chrome'
-    # This is for running Chrome with w3c which is not yet the default
-    {platform_name: 'macOS 10.12',
-     browser_name: 'chrome',
-     "goog:chromeOptions": {w3c: true},
-     browser_version: '65.0'}.merge(sauce_w3c(name))
-  when 'mac_mojave_safari'
-    {platform_name: 'macOS 10.14',
-     browser_name: 'safari',
-     browser_version: '12.0'}.merge(sauce_w3c(name))
-  when 'windows_7_ff'
-    {platform_name: 'Windows 7',
-     browser_name: 'firefox',
-     browser_version: '60.0'}.merge(sauce_w3c(name))
-  else
-    # Always specify a default;
-    # this doesn't force Chrome to w3c
-    {platform: 'macOS 10.12',
-     browser_name: 'chrome',
-     version: '65.0'}.merge(sauce_oss(name))
-  end
-end
-
-def sauce_w3c(name)
-  {'sauce:options' => {name: name,
-                       build: build_name,
-                       username: ENV['SAUCE_USERNAME'],
-                       access_key: ENV['SAUCE_ACCESS_KEY'],
-                       selenium_version: '3.141.59'}}
-end
-
-def sauce_oss(name)
-  {name: name,
-   build: build_name,
-   username: ENV['SAUCE_USERNAME'],
-   access_key: ENV['SAUCE_ACCESS_KEY'],
-   iedriver_version: '3.141.59',
-   selenium_version: '3.141.59'}
-end
-
-#
-# Note that this build name is specifically for Travis CI execution
+# Note that this build name is specifically for Circle CI execution
 # Most CI tools have ENV variables that can be structured to provide useful build names
 #
 def build_name
-  if ENV['TRAVIS_REPO_SLUG']
-    "#{ENV['TRAVIS_REPO_SLUG'][%r{[^/]+$}]}: #{ENV['TRAVIS_JOB_NUMBER']}"
+  if ENV['CIRCLE_JOB']
+    "#{ENV['CIRCLE_JOB']}: #{ENV['CIRCLE_BUILD_NUM']}"
   elsif ENV['SAUCE_START_TIME']
     ENV['SAUCE_START_TIME']
   else
