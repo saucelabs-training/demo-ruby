@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 require 'rspec/core/rake_task'
+require 'rubocop/rake_task'
+
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.options = ['--display-cop-names']
+end
 
 #
 # For use in building a unique Build Name for running tests in parallel on Sauce Labs from a local machine
@@ -16,37 +21,49 @@ ENV['SAUCE_START_TIME'] = "Ruby-Cucumber-Selenium: Local-#{Time.now.to_i}"
 ENV['PARALLEL_THREADS'] = '10'
 
 #
-# Ideally run one of these Rake Tasks in your CI rather than
-# setting the 2 ENV variables and executing this command
+# Ideally run one of these Rake Tasks per build in your CI
 #
-
+# Ideally pull these values from a config file instead of hard-coding
+#
 desc 'Run tests in parallel within suite using Windows 10 with Edge'
 task :windows_10_edge do
-  ENV['PLATFORM'] = 'windows_10_edge'
+  ENV['PLATFORM_NAME'] = 'Windows 10'
+  ENV['BROWSER_NAME'] = 'edge'
   system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
 end
 
 desc 'Run tests in parallel within suite using Mac Sierra with Chrome'
 task :mac_sierra_chrome do
-  ENV['PLATFORM'] = 'mac_sierra_chrome'
-  system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
+  ENV['PLATFORM_NAME'] = 'macOS 10.12'
+  ENV['BROWSER_NAME'] = 'chrome'
+  system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios --backtrace"
 end
 
 desc 'Run tests in parallel within suite using Windows 7 with Firefox'
 task :windows_7_ff do
-  ENV['PLATFORM'] = 'windows_7_ff'
+  ENV['PLATFORM_NAME'] = 'Windows 7'
+  ENV['BROWSER_NAME'] = 'firefox'
   system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
 end
 
 desc 'Run tests in parallel within suite using Windows 8 with Internet Explorer'
 task :windows_8_ie do
-  ENV['PLATFORM'] = 'windows_8_ie'
+  ENV['PLATFORM_NAME'] = 'Windows 8.1'
+  ENV['BROWSER_NAME'] = 'ie'
   system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
 end
 
 desc 'Run tests in parallel within suite using Mac Mojave with Safari'
 task :mac_mojave_safari do
-  ENV['PLATFORM'] = 'mac_mojave_safari'
+  ENV['PLATFORM_NAME'] = 'macOS 10.14'
+  ENV['BROWSER_NAME'] = 'safari'
+  system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
+end
+
+desc 'Run tests in parallel within suite using Mac Mojave with Safari'
+task :headless do
+  ENV['BROWSER_NAME'] = 'chrome'
+  ENV['PLATFORM_NAME'] = 'linux'
   system "parallel_cucumber features/ -n #{ENV['PARALLEL_THREADS']} --group-by scenarios"
 end
 

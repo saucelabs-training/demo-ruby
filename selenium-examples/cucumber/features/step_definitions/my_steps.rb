@@ -22,7 +22,7 @@ When(/^I log in with valid credentials$/) do
   @driver.find_element(css: '[data-test=username]').send_keys 'standard_user'
   @driver.find_element(css: '[data-test=password]').send_keys 'secret_sauce'
   @driver.find_element(css: '[type=submit]').click
-  sleep 0.5 #this was added due to CI Runner latency. Don't do this normally, this is a bad practice.
+  sleep 0.5 # this was added due to CI Runner latency. Don't do this normally, this is a bad practice.
 end
 
 Then(/^I should be logged in$/) do
@@ -44,5 +44,5 @@ And(/^I have (\d+) items in the Cart$/) do |number|
 end
 
 When(/^I remove (\d+) item$/) do |number|
-  number.times { @driver.find_element(class: 'btn_secondary').click }
+  number.to_i.times { @driver.find_element(class: 'btn_secondary').click }
 end

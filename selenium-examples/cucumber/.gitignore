@@ -1,3 +1,39 @@
+### Ruby template
+*.gem
+*.log
+*.rbc
+*.DS_Store
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
 
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+## Environment normalisation:
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+
+#.bundle
+**/.bundle
+
+# Package Files #
+*.zip
+*.tar.gz
+*.rar
+
+# IDEA files
 .idea/
-junit_reports
+**.idea
+*.iml
+.rakeTasks
