@@ -3,8 +3,8 @@
 source 'https://www.rubygems.org'
 
 gem 'capybara', '>= 3.16.2'
-gem 'cucumber'
-gem 'parallel_tests'
+gem 'cucumber', '~> 2.0'
+gem 'parallel_tests', '~> 2.16.0'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
