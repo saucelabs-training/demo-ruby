@@ -8,7 +8,7 @@ RSpec.shared_context 'with visual testing', shared_context: :metadata do
     example_description = example.metadata[:visual] if example.metadata[:visual].instance_of? String
     @test_name = example_description || example.metadata[:example_group][:full_description]
 
-    endpoint = 'http://staging-hub.screener.io/wd/hub'
+    endpoint = 'https://hub.screener.io/wd/hub'
     @driver = Selenium::WebDriver.for :remote, url: endpoint, desired_capabilities: desired_caps
     @driver.execute_script '/*@visual.init*/', @test_name
   end

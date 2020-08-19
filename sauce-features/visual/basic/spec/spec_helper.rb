@@ -16,7 +16,7 @@ RSpec.configure do |config|
                                                                                viewportSize: '1280x1024'})
 
     @driver = Selenium::WebDriver.for :remote,
-                                      url: 'http://staging-hub.screener.io/wd/hub',
+                                      url: 'https://hub.screener.io/wd/hub',
                                       desired_capabilities: caps
   end
 
