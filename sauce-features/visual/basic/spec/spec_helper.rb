@@ -22,7 +22,7 @@ RSpec.configure do |config|
     @driver = Selenium::WebDriver.for :remote,
                                       url: 'https://hub.screener.io/wd/hub',
                                       desired_capabilities: caps,
-                                      :http_client => http_client
+                                      :http_client: http_client
     @driver.manage.timeouts.script_timeout = 90
   end
 
