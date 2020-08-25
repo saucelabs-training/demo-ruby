@@ -15,9 +15,15 @@ RSpec.configure do |config|
                                                                                projectName: 'visual-e2e-test',
                                                                                viewportSize: '1280x1024'})
 
+    # On complex websites and browsers like internet explorer 11, you might need to increase
+    # scripts and connection timeout in order for visual to be able to capture UI snapshot
+    http_client = Selenium::WebDriver::Remote::Http::Default.new
+    http_client.read_timeout = 90 # seconds
     @driver = Selenium::WebDriver.for :remote,
                                       url: 'https://hub.screener.io/wd/hub',
-                                      desired_capabilities: caps
+                                      desired_capabilities: caps,
+                                      http_client: http_client
+    @driver.manage.timeouts.script_timeout = 90
   end
 
   config.after do
