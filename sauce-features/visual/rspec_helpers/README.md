@@ -4,7 +4,7 @@
 ## Running the Example
 ### Pre-requisites
 1. An enterprise grade Sauce Labs account
-2. Access to the visual testing beta; Ask your CSM!
+2. Access to the Sauce Visual E2E product; Ask your CSM!
 3. A Sane Ruby environment with bundler installed
 
 ### Getting Started
