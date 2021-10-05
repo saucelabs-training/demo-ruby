@@ -20,14 +20,6 @@ In order to complete these exercises you must complete the following prerequisit
 * Install an [IDE](https://github.com/saucelabs-training/demo-ruby/blob/master/docs/prerequisites.md#install-an-ide)
 * [Setup the Project](#setup-the-project)
 
-> Select the button below to try this demo in [Gitpod](https://www.gitpod.io/)
->
-> <a href="https://gitpod.io/#https://github.com/saucelabs-training/demo-ruby"><img src="https://github.com/saucelabs-training/demo-ruby/blob/master/docs/open-in-gitpod.png" title="Open in Gitpod"></a>
->
-> [Click here](docs/gitpod_instructions.md) to see how to setup your Sauce Labs credentials in Gitpod
-
-<br />
-
 ### Setup the Project
  
 1. Setup `Gemfile`:
