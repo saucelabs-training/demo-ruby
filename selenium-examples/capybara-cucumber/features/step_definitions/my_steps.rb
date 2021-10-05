@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Given(/^I am on the Product Page$/) do
-  visit 'http://www.saucedemo.com/inventory.html'
+  visit 'https://www.saucedemo.com/v1/inventory.html'
 end
 
 When(/^I add (.*) items$/) do |number|
@@ -10,13 +10,13 @@ end
 
 Then(/^I should see (.*) items? in the cart$/) do |number|
   expect(page).to have_css('.shopping_cart_badge', exact_text: number)
-  visit 'https://www.saucedemo.com/cart.html'
+  visit 'https://www.saucedemo.com/v1/cart.html'
 
   expect(page).to have_css('.inventory_item_name', count: number.to_i)
 end
 
 Given(/^I am on the Login Page$/) do
-  visit 'http://www.saucedemo.com'
+  visit 'https://www.saucedemo.com'
 end
 
 When(/^I log in with (valid|invalid) credentials$/) do |valid|
@@ -24,7 +24,7 @@ When(/^I log in with (valid|invalid) credentials$/) do |valid|
 
   fill_in 'Username', with: username
   fill_in 'Password', with: 'secret_sauce'
-  click_button('LOGIN')
+  click_button('Login')
 end
 
 Then(/^I should be logged in$/) do

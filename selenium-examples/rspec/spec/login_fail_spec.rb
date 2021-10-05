@@ -8,15 +8,13 @@
 require 'spec_helper'
 
 describe 'Authentication' do
-  let(:driver) { @driver }
-
-  before { driver.get 'https://www.saucedemo.com' }
+  before { @driver.get 'https://www.saucedemo.com' }
 
   it 'fails' do
-    driver.find_element(css: "[data-test='username']").send_keys 'locked_out_user'
-    driver.find_element(css: "[data-test='password']").send_keys 'secret_sauce'
-    driver.find_element(css: "[type='submit']").click
+    @driver.find_element(css: "[data-test='username']").send_keys 'locked_out_user'
+    @driver.find_element(css: "[data-test='password']").send_keys 'secret_sauce'
+    @driver.find_element(css: "[type='submit']").click
 
-    expect(driver.find_elements(class: 'error-button').size).to be > 0
+    expect(@driver.find_elements(class: 'error-button').size).to be > 0
   end
 end

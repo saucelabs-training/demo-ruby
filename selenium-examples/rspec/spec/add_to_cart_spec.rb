@@ -8,24 +8,22 @@
 require 'spec_helper'
 
 describe 'Cart' do
-  let(:driver) { @driver }
-
-  before { driver.get 'https://www.saucedemo.com/inventory.html' }
+  before { @driver.get 'https://www.saucedemo.com/v1/inventory.html' }
 
   it 'adds one' do
-    driver.find_element(class: 'btn_primary').click
+    @driver.find_element(class: 'btn_primary').click
 
-    expect(driver.find_element(class: 'shopping_cart_badge').text).to eq '1'
-    driver.get 'https://www.saucedemo.com/cart.html'
-    expect(driver.find_elements(class: 'inventory_item_name').size).to eq 1
+    expect(@driver.find_element(class: 'shopping_cart_badge').text).to eq '1'
+    @driver.get 'https://www.saucedemo.com/v1/cart.html'
+    expect(@driver.find_elements(class: 'inventory_item_name').size).to eq 1
   end
 
   it 'adds two' do
-    driver.find_element(class: 'btn_primary').click
-    driver.find_element(class: 'btn_primary').click
+    @driver.find_element(class: 'btn_primary').click
+    @driver.find_element(class: 'btn_primary').click
 
-    expect(driver.find_element(class: 'shopping_cart_badge').text).to eq '2'
-    driver.get 'https://www.saucedemo.com/cart.html'
-    expect(driver.find_elements(class: 'inventory_item_name').size).to eq 2
+    expect(@driver.find_element(class: 'shopping_cart_badge').text).to eq '2'
+    @driver.get 'https://www.saucedemo.com/v1/cart.html'
+    expect(@driver.find_elements(class: 'inventory_item_name').size).to eq 2
   end
 end

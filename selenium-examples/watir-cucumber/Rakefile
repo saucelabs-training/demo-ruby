@@ -10,7 +10,7 @@ end
 #
 # For use in building a unique Build Name for running tests in parallel on Sauce Labs from a local machine
 #
-ENV['SAUCE_START_TIME'] = "Ruby-Cucumber-Selenium: Local-#{Time.now.to_i}"
+ENV['SAUCE_BUILD_NAME'] = "Ruby-Watir-Cucumber: Local-#{Time.now.to_i}"
 
 #
 # Uses parallel_test gem to set the number of tests that get run in parallel

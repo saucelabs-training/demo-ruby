@@ -10,13 +10,13 @@ end
 #
 # For use in building a unique Build Name for Sauce Labs
 #
-ENV['SAUCE_START_TIME'] = "Ruby-RSpec-Selenium: Local-#{Time.now.to_i}"
+ENV['SAUCE_BUILD_NAME'] = "Ruby-Watir-RSpec: Local-#{Time.now.to_i}"
 
 #
 # Uses parallel-split-test gem to set the number of tests that get run in parallel
 # parallel_split_test gem splits up tests within files
 #
-ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '10'
+ENV['PARALLEL_SPLIT_TEST_PROCESSES'] ||= '10'
 
 #
 # Ideally run one of these Rake Tasks per build in your CI
@@ -85,7 +85,6 @@ PLATFORMS = %w[windows_10_edge mac_sierra_chrome windows_7_ff windows_8_ie mac_m
 PLATFORMS.each do |platform|
   task "#{platform}_demo" do
     ENV['PLATFORM'] = platform
-    ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '2'
     begin
       @result = system 'parallel_split_test spec'
     ensure
