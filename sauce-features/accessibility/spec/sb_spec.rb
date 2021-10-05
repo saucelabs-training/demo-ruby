@@ -2,7 +2,6 @@
 
 require 'rspec'
 require 'sauce_bindings'
-require 'sa11y/analyze'
 
 describe 'Sauce Bindings Accessibility' do
   before do

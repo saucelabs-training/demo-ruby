@@ -10,7 +10,7 @@ end
 #
 # For use in building a unique Build Name for running tests in parallel on Sauce Labs from a local machine
 #
-ENV['SAUCE_START_TIME'] = "Ruby-RSpec-Capybara: Local-#{Time.now.to_i}"
+ENV['SAUCE_BUILD_NAME'] = "Ruby-RSpec-Capybara: Local-#{Time.now.to_i}"
 
 #
 # Uses parallel-split-test gem to set the number of tests that get run in parallel
@@ -18,7 +18,7 @@ ENV['SAUCE_START_TIME'] = "Ruby-RSpec-Capybara: Local-#{Time.now.to_i}"
 # Typically this gets set up to the limit of your Sauce Labs Sessions,
 # or a subset as required to run multiple builds on Sauce Labs simultaneously
 #
-ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '10'
+ENV['PARALLEL_SPLIT_TEST_PROCESSES'] ||= '10'
 
 #
 # Ideally run one of these Rake Tasks per build in your CI
@@ -87,7 +87,6 @@ PLATFORMS = %w[windows_10_edge mac_sierra_chrome windows_7_ff windows_8_ie mac_m
 PLATFORMS.each do |platform|
   task "#{platform}_demo" do
     ENV['PLATFORM'] = platform
-    ENV['PARALLEL_SPLIT_TEST_PROCESSES'] = '2'
     begin
       @result = system 'parallel_split_test spec'
     ensure

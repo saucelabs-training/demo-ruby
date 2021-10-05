@@ -9,7 +9,7 @@ describe 'Authentication' do
     fill_in 'Username', with: 'locked_out_user'
     fill_in 'Password', with: 'secret_sauce'
 
-    click_button('LOGIN')
+    click_button('Login')
 
     expect(page).to have_css('.error-button')
   end

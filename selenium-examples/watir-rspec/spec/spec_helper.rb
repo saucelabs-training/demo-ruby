@@ -40,8 +40,8 @@ RSpec.configure do |config|
   def build_name
     if ENV['CIRCLE_JOB']
       "#{ENV['CIRCLE_JOB']}: #{ENV['CIRCLE_BUILD_NUM']}"
-    elsif ENV['SAUCE_START_TIME']
-      ENV['SAUCE_START_TIME']
+    elsif ENV['SAUCE_BUILD_NAME']
+      ENV['SAUCE_BUILD_NAME']
     else
       "Ruby-Watir-Selenium: Local-#{Time.now.to_i}"
     end

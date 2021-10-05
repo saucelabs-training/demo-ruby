@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+require 'rspec'
+require 'selenium-webdriver'
+require 'sa11y/analyze'
 
 describe 'Sa11y Accessibility' do
   before do

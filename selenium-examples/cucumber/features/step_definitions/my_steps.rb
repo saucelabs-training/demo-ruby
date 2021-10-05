@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Given(/^I am on the Product Page$/) do
-  @driver.get 'http://www.saucedemo.com/inventory.html'
+  @driver.get 'http://www.saucedemo.com/v1/inventory.html'
 end
 
 When(/^I add (.*) items$/) do |number|
@@ -10,7 +10,7 @@ end
 
 Then(/^I should see (.*) items? in the cart$/) do |number|
   expect(@driver.find_element(class: 'shopping_cart_badge').text).to eq number
-  @driver.get 'https://www.saucedemo.com/cart.html'
+  @driver.get 'https://www.saucedemo.com/v1/cart.html'
   expect(@driver.find_elements(class: 'inventory_item_name').size).to eq number.to_i
 end
 

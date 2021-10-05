@@ -1,4 +1,4 @@
-name: Selenium Examples
+name: Sauce Examples
 
 on:
   - push
@@ -6,12 +6,12 @@ on:
 
 jobs:
   ruby-tests:
-    name: Selenium Examples
+    name: Sauce Examples
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        dir: [ capybara-cucumber, capybara-rspec, cucumber, rspec, watir-cucumber, watir-rspec ]
+        dir: [ accessibility, visual ]
     steps:
       - uses: actions/checkout@v2
       - name: Setup Ruby
@@ -19,11 +19,11 @@ jobs:
         with:
           ruby-version: 2.7
       - name: Install Dependencies
-        working-directory: selenium-examples/${{ matrix.dir }}
+        working-directory: sauce-features/${{ matrix.dir }}
         run: bundle install
       - name: Run ${{ matrix.dir }} tests
-        working-directory: selenium-examples/${{ matrix.dir }}
+        working-directory: sauce-features/${{ matrix.dir }}
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-        run: bundle exec rake sauce_demo
+        run: bundle exec rake
