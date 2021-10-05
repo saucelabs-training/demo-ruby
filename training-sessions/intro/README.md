@@ -1,5 +1,7 @@
 # A Technical Introduction to Sauce Labs for Non-Technical Users
 
+Given at Sauce Labs Kickoff 2020
+
 ### Executing a Job on Sauce Labs
 
 1. [Sign up for a Sauce Labs Account](https://saucelabs.com/sign-up)
