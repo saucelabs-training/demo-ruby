@@ -1,0 +1,29 @@
+name: Ruby Tests
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  ruby-tests:
+    name: Ruby Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dir: [ capybara-cucumber, capybara-rspec, cucumber, rspec, watir-cucumber, watir-rspec ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Install Dependencies
+        working-directory: selenium-examples/${{ matrix.dir }}
+        run: bundle install
+      - name: Run ${{ matrix.dir }} tests
+        working-directory: selenium-examples/${{ matrix.dir }}
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+        run: bundle exec rake sauce_demo
