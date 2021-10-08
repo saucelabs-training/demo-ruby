@@ -29,7 +29,7 @@ Before do |scenario|
     Capybara::Selenium::Driver.new(app,
                                    browser: :remote,
                                    url: url,
-                                   desired_capabilities: caps)
+                                   capabilities: caps)
   end
   Capybara.current_driver = :sauce
 end

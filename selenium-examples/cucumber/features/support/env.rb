@@ -15,18 +15,18 @@ Before do |scenario|
 
   browser_name = ENV['BROWSER_NAME'] || 'chrome'
 
-  options = {browser_name: browser_name,
-             platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
-             browser_version: ENV['BROWSER_VERSION'] || 'latest',
-             'sauce:options': {name: "#{scenario.feature.name} - #{scenario.name}",
-                               build: build_name,
-                               username: ENV['SAUCE_USERNAME'],
-                               access_key: ENV['SAUCE_ACCESS_KEY']}}
+  options = Selenium::WebDriver::Options.send(browser_name)
+  options.platform_name = ENV['PLATFORM_NAME'] || 'Windows 10'
+  options.browser_version = ENV['BROWSER_VERSION'] || 'latest'
+  sauce_options = {name: "#{scenario.feature.name} - #{scenario.name}",
+                   build: build_name,
+                   username: ENV['SAUCE_USERNAME'],
+                   access_key: ENV['SAUCE_ACCESS_KEY']}
+  options.add_option('sauce:options', sauce_options)
 
-  capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser_name, options)
   @driver = Selenium::WebDriver.for(:remote,
                                     url: url,
-                                    desired_capabilities: capabilities)
+                                    capabilities: options)
 end
 
 After do |scenario|

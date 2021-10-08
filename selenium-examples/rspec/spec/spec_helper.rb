@@ -5,7 +5,7 @@ require 'sauce_whisk'
 
 RSpec.configure do |config|
   config.before do |example|
-    url = 'https://ondemand.us-west-1.saucelabs.com:443/wd/hub'
+    url = 'https://ondemand.us-west-1.saucelabs.com/wd/hub'
     SauceWhisk.data_center = :US_WEST
 
     if ENV['PLATFORM_NAME'] == 'linux' # Then Headless
@@ -15,18 +15,18 @@ RSpec.configure do |config|
 
     browser_name = ENV['BROWSER_NAME'] || 'chrome'
 
-    options = {browser_name: browser_name,
-               platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
-               browser_version: ENV['BROWSER_VERSION'] || 'latest',
-               'sauce:options': {name: example.full_description,
-                                 build: build_name,
-                                 username: ENV['SAUCE_USERNAME'],
-                                 access_key: ENV['SAUCE_ACCESS_KEY']}}
+    options = Selenium::WebDriver::Options.send(browser_name)
+    options.platform_name = ENV['PLATFORM_NAME'] || 'Windows 10'
+    options.browser_version = ENV['BROWSER_VERSION'] || 'latest'
+    sauce_options = {name: example.full_description,
+                     build: build_name,
+                     username: ENV['SAUCE_USERNAME'],
+                     access_key: ENV['SAUCE_ACCESS_KEY']}
+    options.add_option('sauce:options', sauce_options)
 
-    capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser_name, options)
     @driver = Selenium::WebDriver.for(:remote,
                                       url: url,
-                                      desired_capabilities: capabilities)
+                                      capabilities: options)
   end
 
   config.after do |example|

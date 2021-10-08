@@ -24,20 +24,19 @@ RSpec.configure do |config|
 
       browser_name = ENV['BROWSER_NAME'] || 'chrome'
 
-      options = {browser_name: browser_name,
-                 platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
-                 browser_version: ENV['BROWSER_VERSION'] || 'latest',
-                 'sauce:options': {name: test.full_description,
-                                   build: build_name,
-                                   username: ENV['SAUCE_USERNAME'],
-                                   access_key: ENV['SAUCE_ACCESS_KEY']}}
-
-      caps = Selenium::WebDriver::Remote::Capabilities.send(browser_name, options)
+      options = Selenium::WebDriver::Options.send(browser_name)
+      options.platform_name = ENV['PLATFORM_NAME'] || 'Windows 10'
+      options.browser_version = ENV['BROWSER_VERSION'] || 'latest'
+      sauce_options = {name: test.full_description,
+                       build: build_name,
+                       username: ENV['SAUCE_USERNAME'],
+                       access_key: ENV['SAUCE_ACCESS_KEY']}
+      options.add_option('sauce:options', sauce_options)
 
       Capybara::Selenium::Driver.new(app,
                                      browser: :remote,
                                      url: url,
-                                     desired_capabilities: caps)
+                                     capabilities: options)
     end
     Capybara.current_driver = :sauce
   end

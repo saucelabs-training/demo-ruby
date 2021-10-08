@@ -15,16 +15,14 @@ RSpec.configure do |config|
 
     browser_name = ENV['BROWSER_NAME'] || 'chrome'
 
-    options = {browser_name: browser_name,
-               platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
+    options = {platform_name: ENV['PLATFORM_NAME'] || 'Windows 10',
                browser_version: ENV['BROWSER_VERSION'] || 'latest',
-               url: url,
                'sauce:options': {name: example.full_description,
                                  build: build_name,
                                  username: ENV['SAUCE_USERNAME'],
                                  access_key: ENV['SAUCE_ACCESS_KEY']}}
 
-    @browser = Watir::Browser.new browser_name, options
+    @browser = Watir::Browser.new browser_name.to_sym, url: url, options: options
   end
 
   config.after do |example|
