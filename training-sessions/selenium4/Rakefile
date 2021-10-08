@@ -1,0 +1,15 @@
+# frozen_string_literal: true
+
+require "rspec/core/rake_task"
+require "parallel_split_test"
+
+ENV['PARALLEL_SPLIT_TEST_PROCESSES'] ||= '10'
+
+task :default do
+  Rake::Task[:parallel].execute
+end
+
+desc 'Run tests in parallel'
+task :parallel do
+  system 'parallel_split_test spec'
+end

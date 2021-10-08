@@ -1,0 +1,25 @@
+name: Selenium 4 Examples
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  ruby-tests:
+    name: Selenium 4 Examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7
+      - name: Install Dependencies
+        working-directory: training-sessions/selenium4
+        run: bundle install
+      - name: Run Selenium 4 tests
+        working-directory: training-sessions/selenium4
+        env:
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+        run: bundle exec rake
