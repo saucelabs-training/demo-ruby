@@ -3,19 +3,10 @@
 require 'selenium-webdriver'
 require 'sauce_whisk'
 
+# This test code is being used in docs: https://docs.saucelabs.com/web-apps/automated-testing/selenium/
 RSpec.configure do |config|
   config.before do |example|
-    url = 'https://ondemand.us-west-1.saucelabs.com/wd/hub'
-    SauceWhisk.data_center = :US_WEST
-
-    if ENV['PLATFORM_NAME'] == 'linux' # Then Headless
-      url = 'https://ondemand.us-east-1.saucelabs.com:443/wd/hub'
-      SauceWhisk.data_center = :US_EAST
-    end
-
-    browser_name = ENV['BROWSER_NAME'] || 'chrome'
-
-    options = Selenium::WebDriver::Options.send(browser_name)
+    options = Selenium::WebDriver::Options.send(ENV['BROWSER_NAME'] || 'chrome')
     options.platform_name = ENV['PLATFORM_NAME'] || 'Windows 10'
     options.browser_version = ENV['BROWSER_VERSION'] || 'latest'
     sauce_options = {name: example.full_description,
@@ -25,12 +16,13 @@ RSpec.configure do |config|
     options.add_option('sauce:options', sauce_options)
 
     @driver = Selenium::WebDriver.for(:remote,
-                                      url: url,
+                                      url: 'https://ondemand.us-west-1.saucelabs.com/wd/hub',
                                       capabilities: options)
   end
 
   config.after do |example|
-    SauceWhisk::Jobs.change_status(@driver.session_id, !example.exception)
+    result = example.exception ? "failed" : "passed"
+    @driver.execute_script("sauce:job-result=#{result}")
     @driver.quit
   end
 
