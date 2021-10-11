@@ -16,7 +16,7 @@ describe 'Authentication' do
     password_locator = {css: '#password'}
     submit_locator = {css: '.btn_action'}
 
-    wait = Selenium::WebDriver::Wait.new()
+    wait = Selenium::WebDriver::Wait.new
     wait.until { @driver.find_element(username_locator).displayed? }
 
     username_element = @driver.find_element(username_locator)
