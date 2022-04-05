@@ -4,9 +4,6 @@
 # Log file
 *.log
 
-#Gemfile.lock
-*.lock
-
 #.bundle
 **/.bundle
 
