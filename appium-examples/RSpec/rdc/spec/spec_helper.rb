@@ -3,19 +3,15 @@ require 'appium_lib'
 require 'rspec/retry'
 
 RSpec.configure do |config|
-  RELEASE = 'https://github.com/saucelabs/my-demo-app-rn/releases/download/v1.2.0'.freeze
-  ANDROID = "#{RELEASE}/Android-MyDemoAppRN.1.2.0.build-231.apk".freeze
-  IOS = "#{RELEASE}/iOS-Real-Device-MyRNDemoApp.1.2.0-150.ipa".freeze
+  GH_RELEASE = 'https://github.com/saucelabs/my-demo-app-rn/releases/download/v1.2.0'.freeze
 
   config.exceptions_to_retry = [Selenium::WebDriver::Error::UnknownError, Selenium::WebDriver::Error::ServerError]
   config.default_retry_count = 4
   config.verbose_retry = true
 
   config.before(:each) do |example|
-    caps = {}
-    caps[:platform_name] = ENV['PLATFORM_NAME'] || 'Android'
-    caps['appium:app'] = caps[:platform_name] == 'iOS' ? IOS : ANDROID
-    caps['appium:deviceName'] = ENV['DEVICE_NAME'] || 'samsung.*'
+
+    caps = example.metadata[:android] ? android_caps : ios_caps
     caps['appium:platformVersion'] = '12'
 
     caps['sauce:options'] = {}
@@ -38,3 +34,20 @@ RSpec.configure do |config|
     end
   end
 end
+
+def ios_caps
+  caps = {}
+  caps[:platform_name] = 'iOS'
+  caps['appium:app'] = "#{GH_RELEASE}/iOS-Real-Device-MyRNDemoApp.1.2.0-150.ipa"
+  caps['appium:deviceName'] = ENV['DEVICE_NAME'] || 'iPhone .*'
+  caps
+end
+
+def android_caps
+  caps = {}
+  caps[:platform_name] = 'Android'
+  caps['appium:app'] = "#{GH_RELEASE}/Android-MyDemoAppRN.1.2.0.build-231.apk"
+  caps['appium:deviceName'] = ENV['DEVICE_NAME'] || 'samsung.*'
+  caps
+end
+

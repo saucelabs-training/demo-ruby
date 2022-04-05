@@ -7,28 +7,24 @@ ENV['SAUCE_BUILD_NAME'] = "RDC Local - #{Time.now.to_i}"
 
 desc 'Samsung Device'
 task :samsung do
-  ENV['PLATFORM_NAME'] = 'Android'
   ENV['DEVICE_NAME'] = 'samsung.*'
   system('parallel_rspec -- -t android -- spec')
 end
 
 desc 'Pixel Device'
 task :pixel do
-  ENV['PLATFORM_NAME'] = 'Android'
   ENV['DEVICE_NAME'] = 'Google Pixel.*'
   system('parallel_rspec -- -t android -- spec')
 end
 
 desc 'iPhone Device'
 task :iphone do
-  ENV['PLATFORM_NAME'] = 'iOS'
   ENV['DEVICE_NAME'] = 'iPhone .*'
   system('parallel_rspec -- -t ios -- spec')
 end
 
 desc 'iPad Device'
 task :ipad do
-  ENV['PLATFORM_NAME'] = 'iOS'
   ENV['DEVICE_NAME'] = 'iPad .*'
   system('parallel_rspec -- -t ios -- spec')
 end
