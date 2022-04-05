@@ -10,7 +10,6 @@ RSpec.configure do |config|
   config.verbose_retry = true
 
   config.before(:each) do |example|
-
     platform = example.metadata[:platform]
     caps = send("#{platform}_caps")
     caps['appium:platformVersion'] = '12'
@@ -29,7 +28,7 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do |example|
-    if @driver.driver
+    if @driver&.driver
       @driver.execute_script("sauce:job-result=#{!example.exception}")
       @driver.driver_quit
     end

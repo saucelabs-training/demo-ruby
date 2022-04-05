@@ -3,7 +3,9 @@
 require 'rspec/core/rake_task'
 
 RSpec::Core::RakeTask.new(:spec)
-ENV['SAUCE_BUILD_NAME'] = "RDC Local - #{Time.now.to_i}"
+ENV['SAUCE_BUILD_NAME'] = "Ruby RDC Local - #{Time.now.to_i}"
+# parallel_test gem setting for how many to run in parallel
+ENV['TEST_ENV_NUMBER'] = '10'
 
 desc 'Samsung Device'
 task :samsung do
@@ -45,5 +47,6 @@ task :chrome do
   system('parallel_rspec -- -t platform:web -- spec')
 end
 
+# For larger test suites probably don't want to use multitask for this
 desc 'run all configs in parallel'
 multitask parallel: %i[pixel samsung iphone ipad chrome safari]
