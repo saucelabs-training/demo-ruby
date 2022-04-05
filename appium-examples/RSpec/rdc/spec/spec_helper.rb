@@ -11,7 +11,8 @@ RSpec.configure do |config|
 
   config.before(:each) do |example|
 
-    caps = example.metadata[:android] ? android_caps : ios_caps
+    platform = example.metadata[:platform]
+    caps = send("#{platform}_caps")
     caps['appium:platformVersion'] = '12'
 
     caps['sauce:options'] = {}
@@ -51,3 +52,10 @@ def android_caps
   caps
 end
 
+def web_caps
+  caps = {}
+  caps[:browser_name] = ENV['BROWSER_NAME'] || 'chrome'
+  caps[:platform_name] = ENV['PLATFORM_NAME'] || 'Android'
+  caps['appium:deviceName'] = ENV['DEVICE_NAME'] || 'samsung.*'
+  caps
+end
