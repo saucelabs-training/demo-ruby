@@ -1,49 +1,39 @@
-def run_tests(deviceName, platformName, platformVersion, app)
-  system("deviceName=\"#{deviceName}\" platformName=\"#{platformName}\" platformVersion=\"#{platformVersion}\" app=\"#{app}\" parallel_split_test spec")
+# frozen_string_literal: true
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+ENV['SAUCE_BUILD_NAME'] = "Ruby EmuSim Local - #{Time.now.to_i}"
+# parallel_test gem setting for how many to run in parallel
+ENV['TEST_ENV_NUMBER'] = '25'
+
+desc 'Android Emulator'
+task :android do
+  ENV['DEVICE_NAME'] = 'Android GoogleAPI Emulator'
+  system('parallel_rspec -- -t platform:android -- spec')
 end
 
-task :Andoid_Emulator_Phone_5_1 do
-  run_tests('Android Emulator', 'Android', '5.1', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
+desc 'iOS Simulator'
+task :iphone do
+  ENV['DEVICE_NAME'] = 'iPhone Simulator'
+  system('parallel_rspec -- -t platform:ios -- spec')
 end
 
-task :Andoid_Emulator_Tablet_5_1 do
-  run_tests('Android Emulator', 'Android', '5.1', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
+desc 'Safari'
+task :safari do
+  ENV['BROWSER_NAME'] = 'Safari'
+  ENV['PLATFORM_NAME'] = 'iOS'
+  ENV['DEVICE_NAME'] = 'iPhone Simulator'
+  system('parallel_rspec -- -t platform:web -- spec')
 end
 
-task :Galaxy_S8_Emulator do
-  run_tests('Samsung Galaxy S8 HD GoogleAPI Emulator', 'Android', '7.0', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
+desc 'Chrome'
+task :chrome do
+  ENV['BROWSER_NAME'] = 'Chrome'
+  ENV['PLATFORM_NAME'] = 'Android'
+  ENV['DEVICE_NAME'] = 'Android GoogleAPI Emulator'
+  system('parallel_rspec -- -t platform:web -- spec')
 end
 
-task :Galaxy_S6_Emulator do
-  run_tests('Samsung Galaxy S6 GoogleAPI Emulator', 'Android', '7.0', 'https://github.com/saucelabs-sample-test-frameworks/Java-Junit-Appium-Android/blob/master/resources/GuineaPigApp-debug.apk?raw=true')
-end
-
-task :iPhone_6_Simulator do
-  run_tests('iPhone 6 Simulator', 'iOS', '10.3', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
-end
-
-task :iPhone_7_Simulator do
-  run_tests('iPhone 7 Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
-end
-
-task :iPad_Air_Simulator do
-  run_tests('iPad Air Simulator', 'iOS', '11.2', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
-end
-
-task :iPad_Simulator do
-  run_tests('iPad (6th generation) Simulator', 'iOS', '12.0', 'https://github.com/saucelabs-training/demo-java/blob/master/appium-example/resources/ios/SauceGuineaPig-sim-debug.app.zip?raw=true')
-end
-
-multitask :test_sauce => [
-    :Andoid_Emulator_Phone_5_1,
-    :Galaxy_S8_Emulator,
-    :Andoid_Emulator_Tablet_5_1,
-    :Galaxy_S6_Emulator,
-    :iPhone_6_Simulator,
-    :iPhone_7_Simulator,
-    :iPad_Air_Simulator,
-    :iPad_Simulator,
-
-] do
-  puts 'Running automation'
-end
+# For larger test suites probably don't want to use multitask for this
+desc 'run all configs in parallel'
+multitask parallel: %i[android iphone safari chrome]
