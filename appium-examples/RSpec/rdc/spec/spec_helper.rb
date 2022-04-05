@@ -21,11 +21,9 @@ RSpec.configure do |config|
     caps['sauce:options'] = {}
     caps['sauce:options'][:appiumVersion] = '1.22.1'
     caps['sauce:options'][:name] = example.full_description
-    caps['sauce:options'][:build] = ENV['SAUCE_BUILD_NAME'] || "RDC Local - #{Time.now.to_i}"
+    caps['sauce:options'][:build] = ENV['SAUCE_BUILD_NAME'] || "Ruby RDC Local - #{Time.now.to_i}"
 
-    appium = {sauce_endpoint: 'ondemand.us-west-1.saucelabs.com/wd/hub',
-              sauce_username: ENV['SAUCE_DEMO_USER'],
-              sauce_access_key: ENV['SAUCE_DEMO_KEY']}
+    appium = {sauce_endpoint: 'ondemand.us-west-1.saucelabs.com/wd/hub'}
 
     @options = {caps: caps, appium_lib: appium}
 
