@@ -1,4 +1,5 @@
 FROM ruby:2.5
 COPY . .
-WORKDIR /demo-ruby
+RUN bundle install
+
 CMD [""]
