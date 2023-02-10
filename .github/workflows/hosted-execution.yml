@@ -1,0 +1,60 @@
+name: Ruby Hosted Execution
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  # Build the project as a Docker image and push it to Docker Hub
+  push_to_registry:
+    name: Build and push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tags }}
+      label: ${{ steps.meta.outputs.labels }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: danielpatrickgraham # TODO: Do not merge this into saucelaabs-training -- no hardcoding
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: danielpatrickgraham/demo-ruby-2 # TODO: Do not merge this into saucelabs-training -- no hardcoding
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true  
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          file: ./Dockerfile
+
+  run-tests:
+    name: Run Tests in Sauce Labs hosted execution environment
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    container: saucelabs/saucectl:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        entrypoint: [
+          "sh -c 'cd sauce-features/accessibility; bundle exec rake;'",
+          "sh -c 'cd selenium-examples/rspec; bundle exec rake;'",
+        ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run tests
+      env:
+        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+        DOCKER_USERNAME: danielpatrickgraham # TODO: Unhardcode this when merge to saucelabs-training
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_TAG: ${{ needs.push_to_registry.outputs.tag }}
+        ENTRYPOINT: ${{ matrix.entrypoint }}
+      run: saucectl run
