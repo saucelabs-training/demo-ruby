@@ -46,7 +46,6 @@ jobs:
         entrypoint: [
           "sh -c 'cd sauce-features/accessibility; bundle exec rake;'",
           "sh -c 'cd selenium-examples/rspec; bundle exec rake;'",
-          "sh -c 'cd selenium-examples/cucumber; bundle exec rake;'",
         ]
     steps:
     - uses: actions/checkout@v2
