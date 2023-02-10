@@ -1,30 +1,61 @@
-name: Hosted Execution
+name: Ruby Hosted Execution
 
 on:
-  - push
-  - pull_request
+  push:
+    branches: [ master ]
+  pull_request:
 
 jobs:
+  # Build the project as a Docker image and push it to Docker Hub
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tags }}
+      label: ${{ steps.meta.outputs.labels }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
       - name: Log in to Docker Hub
-        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
+          username: danielpatrickgraham # TODO: Do not merge this into saucelaabs-training -- no hardcoding
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        uses: docker/metadata-action@v4
         with:
-          images: ${{ secrets.DOCKER_USERNAME }}/ruby-hosted-execution
+          images: danielpatrickgraham/demo-ruby # TODO: Do not merge this into saucelabs-training -- no hardcoding
       - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        uses: docker/build-push-action@v3
         with:
           context: .
-          push: true
+          push: true  
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          file: ./Dockerfile
+
+  run-tests:
+    name: Run Tests in Sauce Labs hosted execution environment
+    needs: push_to_registry
+    runs-on: ubuntu-latest
+    container: saucelabs/saucectl:latest
+    strategy:
+      fail-fast: false
+      matrix:
+        entrypoint: [
+          "sh -c 'cd sauce-features/accessibility; bundle exec rake;'",
+          "sh -c 'cd selenium-examples/rspec; bundle exec rake;'",
+          "sh -c 'cd selenium-examples/cucumber; bundle exec rake;'",
+        ]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run tests
+      env:
+        SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+        SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+        DOCKER_USERNAME: danielpatrickgraham # TODO: Unhardcode this when merge to saucelabs-training
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_TAG: ${{ needs.push_to_registry.outputs.tag }}
+        ENTRYPOINT: ${{ matrix.entrypoint }}
+      run: saucectl run
