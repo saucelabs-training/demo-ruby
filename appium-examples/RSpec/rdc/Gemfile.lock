@@ -14,12 +14,14 @@ GEM
     faye-websocket (0.11.1)
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
-    nokogiri (1.13.3-x86_64-darwin)
+    nokogiri (1.14.3-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
     parallel (1.22.1)
     parallel_tests (3.8.1)
       parallel
-    racc (1.6.0)
+    racc (1.6.2)
     rake (13.0.6)
     rexml (3.2.5)
     rspec (3.11.0)
@@ -49,6 +51,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-20
+  x86_64-linux
 
 DEPENDENCIES
   appium_lib (~> 12.0)
