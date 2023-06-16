@@ -1,5 +1,6 @@
 # List the start up tasks. Learn more: https://www.gitpod.io/docs/configure/workspaces/tasks
+image: ruby:2.7
 tasks:
   - name: Script Task
     init: echo 'init script' # runs during prebuild => https://www.gitpod.io/docs/configure/projects/prebuilds
-    command: sh -c "cd sauce-features/accessibility; bundle install; bundle exec rake;"
+    command: bash ./gitpod.sh
