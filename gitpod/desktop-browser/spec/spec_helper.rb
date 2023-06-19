@@ -23,7 +23,14 @@ RSpec.configure do |config|
     options.browser_version = browser_version
     options.platform_name = platform_name
 
-    sauce_options = {name: name, build: build, username: username, accessKey: access_key, tags: ['gitpod']}
+    is_gitpod = ENV['GITPOD_WORKSPACE_ID'].nil? == false
+    if is_gitpod
+      tags = ['gitpod']
+    else
+      tags = []
+    end
+
+    sauce_options = {name: name, build: build, username: username, accessKey: access_key, tags: tags}
     options.add_option('sauce:options', sauce_options)
 
     # Configure the remote WebDriver
