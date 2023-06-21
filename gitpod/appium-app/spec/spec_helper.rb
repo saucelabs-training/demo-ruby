@@ -26,6 +26,7 @@ RSpec.configure do |config|
     caps['appium:app'] = app_name
     caps['appium:deviceName'] = device_name
     caps['appium:automationName'] = automation_name
+    caps['appium:platformVersion'] = platform_version
     caps['sauce:options'] = {}
     caps['sauce:options'][:username] = username
     caps['sauce:options'][:accessKey] = access_key
